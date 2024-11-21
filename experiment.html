@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My experiment</title>
+    <script src="jspsych/jspsych.js"></script>
+    <script src="jspsych/plugin-html-keyboard-response.js"></script>
+    <script src="jspsych/plugin-html-button-response.js"></script>
+    <script src="jspsych/jspsych-clickable-box.js"></script>
+    <script src="jspsych/jspsych-dual-clickable-box.js"></script>
+    <script src="jspsych/jspsych-ml-flowchart.js"></script>
+    <script src="jspsych/plugin-survey-text.js"></script>
+    <script src="jspsych/plugin-survey-likert.js"></script>
+    <script src="jspsych/plugin-survey-multi-choice.js"></script>
+    <script src="jspsych/plugin-survey.js"></script>
+    <link href="jspsych/jspsych.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body></body>
+
+  <script>
+     const jsPsych = initJsPsych();
+
+     const hello_trial = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: 'Welcome and thank you for participating in our study today. <br> We will be asking you to share your thoughts about interpretable machine learning. '
+    }
+
+    // Survey questions
+    const survey_trial = {
+       type: jsPsychSurveyText,
+       questions: [
+         {prompt: "What department are you affiliated with?", rows: 1, columns: 50, required: true},
+         {prompt: "What comes to mind when you hear the phrase 'interpretable machine learning'?", rows: 3, columns: 50, required: true}
+       ],
+     };
+
+     const position_question = {
+       type: jsPsychSurveyMultiChoice,
+       questions: [
+         {
+           prompt: "What is your position?",
+           options: ["Undergrad", "M.A/M.S", "PhD", "Postdoc", "Faculty", "Staff"],
+           required: true,
+         },
+       ],
+     };
+
+     const familiarity_ml = {
+       type: jsPsychSurveyLikert,
+       questions: [
+         {
+           prompt: "How familiar are you with machine learning in general?",
+           labels: ["1 (Not at all familiar)", "2", "3", "4", "5", "6", "7 (Very familiar)"],
+           required: true,
+         },
+         {
+           prompt: "How familiar are you with the specific topic of interpretability in machine learning?",
+           labels: ["1 (Not at all familiar)", "2", "3", "4", "5", "6", "7 (Very familiar)"],
+           required: true,
+         },
+       ],
+       scale_width: 500, // Optional for wider scales
+    };
+
+    // Intro box
+    const introBox = {
+      type: jsPsychClickableBox,
+      boxID: 'box1',
+      lineText: 'Welcome and thank you for participating in our study today. We will be asking you to share your thoughts about interpretable machine learning.',
+      initialText: 'Throughout this study, there will be optional opportunities to interact with various elements and reveal extra information. Interactive elements will appear in blue boxes which may be clicked. Try it out with this box!',
+      states: [
+        { background: 'yellow', outline: 'solid', displayText: 'In some of these cases, further information is available. Opportunities to get further information about interactive elements will be in yellow boxes, which may also be clicked. Try it out!' },
+        { background: 'white', outline: 'dotted', displayText: 'In either case, when there is no information left to reveal, the box will look like this.' }
+      ],
+    }
+
+    // ML Black Box trial
+    const mlBlackBox = {
+        type: jsPsychClickableBox,
+        boxID: 'box1',
+        lineText: 'Many modern machine learning (ML) technologies are “black boxes”. In this context a black box refers to a system which we understand in terms of its inputs and outputs, leaving the internal elements which negotiate the transformation from input to output obscure.',
+        initialText: 'Click here to see a schematic diagram describing black box ML performing a task.',
+        states: [
+            { background: 'white', outline: 'None', imageSrc: './images/black_box.png' }
+        ],
+        width: '200px',
+        height: '150px',
+    }
+
+    const facialRecognition = {
+        type: jsPsychDualClickableBox,
+        lineText: 'One common ML application is facial expression recognition. Facial expression recognition uses ML to identify the emotions or attributes characterizing a human face. Some examples of inputs and outputs involved in the facial expression recognition task are presented below.',
+        leftBox: {
+            text: 'Inputs',
+            background: 'lightblue',
+            width: '300px',
+            height: '150px',
+            states: [
+            { text: 'All face images in this study are artificial. In real ML settings, images of authentic human faces scraped from the internet are used.', background: 'yellow' },
+            { text: 'The face images in this study were generated with NVIDIA’s StyleGAN generative network.', background: 'white', outline: 'dotted' }
+            ],
+        },
+        rightBox: {
+            text: 'Outputs',
+            background: 'lightblue',
+            width: '300px',
+            height: '150px',
+            states: [
+            { text: 'To “learn” how to describe these characteristics of human faces, the ML algorithm is first “trained” on a large number of samples for which these characteristics are known', background: 'white', outline: 'dotted' },
+            ],
+        },
+        imageSrc: './images/facial_expression.png',
+        imageWidth: '800px',
+        imageHeight: 'auto',
+        };
+
+    // Survey questions for attitude on ML facial recognition
+    const facialRecognitionSurvey = {
+      type: jsPsychSurveyLikert,
+      preamble: `
+        <p>Now, please consider black box ML technology - or “models” - applied to facial recognition tasks to answer the following questions. <br> Using the likert scale, rate how much you agree with each statement <br> Options range from 1: Strongly Disagree to 7: Strongly Agree. </p>
+      `,
+      questions: [
+        { prompt: "I could describe what the model inputs and outputs are", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
+        { prompt: "I could describe which properties of the inputs lead to the outputs", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
+        { prompt: "I could describe at a high level how those input properties lead to the outputs", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
+        { prompt: "I could describe each parameter and calculation going from input to output", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
+        { prompt: "Given a reasonable amount of time, I could reproduce the model’s actual procedure for prediction", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
+        { prompt: "I could implement a model like this from scratch", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
+        { prompt: "I could implement a model like this using general machine learning software frameworks", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
+        { prompt: "I could implement a model like this given pre-built versions of each individual component", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
+        { prompt: "I could implement a model like this given a pre-built version of the entire system", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
+        { prompt: "I trust decisions made using a model like this", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
+        { prompt: "If this model produced an unexpected result, I could figure out why", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
+        { prompt: "The reasoning behind this system’s decisions can be obtained", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
+        { prompt: "The reasoning behind this system’s decisions can be challenged", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
+        { prompt: "This method of interpretation is effective at contextualizing the model’s predictions", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
+        { prompt: "This method of interpretation is effective at establishing the causal chain behind the model’s predictions", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
+        { prompt: "This method of interpretation is effective at conveying information about the model’s predictions", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
+        { prompt: "I would be comfortable with this kind of technology being used to detect whether someone blinked when their photo was being taken", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
+        { prompt: "I would be comfortable with this kind of technology being used to detect the facial drooping characteristic of a stroke", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
+        { prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
+        { prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
+        { prompt: "I would be comfortable with this kind of technology being used to detect someone’s race", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
+      ],
+      scale_width: 600,
+    };
+
+    const pixelSalienceFlowchart = {
+      type: jsPsychMLFlowchart,
+      flowchartTitle: `
+        <b>Pixel salience</b> involves asking which parts of an input were most important for determining the ML model’s output about that input. 
+        By examining how important a given pixel in the input was for the trained model to produce its output and repeating this procedure for every pixel in the input, 
+        a map is produced describing which parts of the input were important for producing the output.
+      `,
+      topImageSrc: './images/face.png',
+      bottomImageSrc: './images/pixel_salience.png',
+      states: {
+        trainedMLModel: [
+          { text: 'Trained ML Model', background: 'lightblue' },
+          { text: 'State 2: Description of Model', background: 'yellow' },
+        ],
+        pixelSalience: [
+          { text: 'Pixel Salience Algorithm', background: 'lightblue' },
+          { text: 'State 2: Explanation of Salience', background: 'green' },
+        ],
+      },
+      trustworthinessScore: 'Trustworthy: 82',
+    };
+
+
+    // Continue button trial
+    const continueButton = {
+        type: jsPsychHtmlButtonResponse,
+        stimulus: '<p>You can click "Continue" at any time to move forward.</p>',
+        choices: ['Continue'],
+        on_finish: () => {
+            console.log('Continue button clicked');
+        },
+    };
+
+    // Display data at the end of the experiment
+    const endTrial = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: `<p>Thank you for participating!</p>`,
+        on_finish: () => {
+            jsPsych.data.displayData(); // Opens data in a new tab
+        },
+    };
+
+    // Combine both trials into a concurrent timeline
+    const timeline = [
+        hello_trial,
+        survey_trial,
+        position_question,
+        familiarity_ml,
+        introBox,
+        mlBlackBox,
+        facialRecognition,
+        facialRecognitionSurvey,
+        pixelSalienceFlowchart,
+        endTrial,
+    ];
+
+    jsPsych.run(timeline);
+  </script>
+</html>
