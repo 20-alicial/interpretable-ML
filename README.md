@@ -8,4 +8,4 @@ There are three custom plugins which most of the functionalities consist of:
   * jspsych-dual-clickable-box.js
   * jspsych-ml-flowchart.js
 
-Open `experiment.html` in browser (tested in Chrome) to run the experiment.
+Clone & open `experiment.html` in browser (tested in Chrome) to run the experiment.
