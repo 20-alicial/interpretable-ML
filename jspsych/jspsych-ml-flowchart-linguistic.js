@@ -58,7 +58,7 @@ var jsPsychMLFlowchart = (function (jsPsychModule) {
         // Render the layout
         display_element.innerHTML = `
           <!-- Header Text -->
-          <div style="text-align: center; font-size: 16px; margin-bottom: 20px;">
+          <div style="text-align: center; font-size: 18px; margin-bottom: 20px;">
             ${trial.flowchartTitle}
           </div>
           
@@ -91,9 +91,9 @@ var jsPsychMLFlowchart = (function (jsPsychModule) {
             <div style="width: 100px; border-top: 2px solid black; margin: 0px 0;"></div>
             
             <!-- Trustworthy Score-->
-            <div style="margin-top: 10px; font-size: 16px !important; text-align: center; font-weight: bold;">
+            <div style="margin-top: 10px; font-size: 32px; text-align: center; font-weight: bold;">
                 ${trial.trustworthinessScore}
-            </div>
+              </div>
             
               <!-- Horizontal Line 2 -->
             <div style="width: 100px; border-top: 2px solid black; margin: 0px 0;"></div>
@@ -162,7 +162,7 @@ var jsPsychMLFlowchart = (function (jsPsychModule) {
         pixelSalienceBox.addEventListener('click', () => {
           const states = trial.states.pixelSalience;
           if (salienceClicks < states.length) {
-            const currentState = states[salienceClick + 1];
+            const currentState = states[salienceClicks + 1];
             pixelSalienceBox.innerHTML = currentState.text;
             pixelSalienceBox.style.background = currentState.background;
 

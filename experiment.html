@@ -8,6 +8,8 @@
     <script src="jspsych/jspsych-clickable-box.js"></script>
     <script src="jspsych/jspsych-dual-clickable-box.js"></script>
     <script src="jspsych/jspsych-ml-flowchart.js"></script>
+    <script src="jspsych/jspsych-ml-flowchart-linguistic.js"></script>
+    <script src="jspsych/jspsych-ml-flowchart-modular-dev.js"></script>
     <script src="jspsych/plugin-survey-text.js"></script>
     <script src="jspsych/plugin-survey-likert.js"></script>
     <script src="jspsych/plugin-survey-multi-choice.js"></script>
@@ -21,7 +23,7 @@
 
      const hello_trial = {
       type: jsPsychHtmlKeyboardResponse,
-      stimulus: 'Welcome and thank you for participating in our study today. <br> We will be asking you to share your thoughts about interpretable machine learning. '
+      stimulus: 'Welcome and thank you for participating in our study today. <br> We will be asking you to share your thoughts about interpretable machine learning. <br> Before we begin, please make sure you are in <b>Full Screen</b> mode. <br><br> Press the space bar to continue.'
     }
 
     // Survey questions
@@ -65,7 +67,7 @@
     const introBox = {
       type: jsPsychClickableBox,
       boxID: 'box1',
-      lineText: 'Welcome and thank you for participating in our study today. We will be asking you to share your thoughts about interpretable machine learning.',
+      lineText: 'Thank you for participating in our study today. We will be asking you to share your thoughts about interpretable machine learning. Please read the instructions carefully.',
       initialText: 'Throughout this study, there will be optional opportunities to interact with various elements and reveal extra information. Interactive elements will appear in blue boxes which may be clicked. Try it out with this box!',
       states: [
         { background: 'yellow', outline: 'solid', displayText: 'In some of these cases, further information is available. Opportunities to get further information about interactive elements will be in yellow boxes, which may also be clicked. Try it out!' },
@@ -77,7 +79,7 @@
     const mlBlackBox = {
         type: jsPsychClickableBox,
         boxID: 'box1',
-        lineText: 'Many modern machine learning (ML) technologies are “black boxes”. In this context a black box refers to a system which we understand in terms of its inputs and outputs, leaving the internal elements which negotiate the transformation from input to output obscure.',
+        lineText: 'Many modern machine learning (ML) technologies are “black boxes”. In this context, a black box refers to a system which we understand in terms of its inputs and outputs, leaving the internal elements which negotiate the transformation from input to output obscure.',
         initialText: 'Click here to see a schematic diagram describing black box ML performing a task.',
         states: [
             { background: 'white', outline: 'None', imageSrc: './images/black_box.png' }
@@ -88,14 +90,14 @@
 
     const facialRecognition = {
         type: jsPsychDualClickableBox,
-        lineText: 'One common ML application is facial expression recognition. Facial expression recognition uses ML to identify the emotions or attributes characterizing a human face. Some examples of inputs and outputs involved in the facial expression recognition task are presented below.',
+        lineText: 'One common ML application is facial expression recognition. Facial expression recognition uses ML to identify the emotions or attributes characterizing a human face. <br> Some examples of inputs and outputs using ML to evaluate the "trustworthiness" of a face are presented below.',
         leftBox: {
             text: 'Inputs',
             background: 'lightblue',
             width: '300px',
             height: '150px',
             states: [
-            { text: 'All face images in this study are artificial. In real ML settings, images of authentic human faces scraped from the internet are used.', background: 'yellow' },
+            { text: 'All face images in this study are artificial. In real ML settings, images of authentic human faces scraped from the internet are used', background: 'yellow' },
             { text: 'The face images in this study were generated with NVIDIA’s StyleGAN generative network.', background: 'white', outline: 'dotted' }
             ],
         },
@@ -113,60 +115,538 @@
         imageHeight: 'auto',
         };
 
-    // Survey questions for attitude on ML facial recognition
+    // Survey questions for attitude on ML facial recognition 
     const facialRecognitionSurvey = {
       type: jsPsychSurveyLikert,
       preamble: `
-        <p>Now, please consider black box ML technology - or “models” - applied to facial recognition tasks to answer the following questions. <br> Using the likert scale, rate how much you agree with each statement <br> Options range from 1: Strongly Disagree to 7: Strongly Agree. </p>
+        <p><br>Now, please consider black box ML technology - or “models” - applied to facial recognition tasks to answer the following questions. <br><br> Using the likert scale, rate how much you agree with each statement <br><br> Options range from 1: Strongly Disagree to 7: Strongly Agree. </p>
       `,
       questions: [
-        { prompt: "I could describe what the model inputs and outputs are", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
-        { prompt: "I could describe which properties of the inputs lead to the outputs", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
-        { prompt: "I could describe at a high level how those input properties lead to the outputs", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
-        { prompt: "I could describe each parameter and calculation going from input to output", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
-        { prompt: "Given a reasonable amount of time, I could reproduce the model’s actual procedure for prediction", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
-        { prompt: "I could implement a model like this from scratch", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
-        { prompt: "I could implement a model like this using general machine learning software frameworks", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
-        { prompt: "I could implement a model like this given pre-built versions of each individual component", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
-        { prompt: "I could implement a model like this given a pre-built version of the entire system", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
-        { prompt: "I trust decisions made using a model like this", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
-        { prompt: "If this model produced an unexpected result, I could figure out why", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
-        { prompt: "The reasoning behind this system’s decisions can be obtained", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
-        { prompt: "The reasoning behind this system’s decisions can be challenged", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
-        { prompt: "This method of interpretation is effective at contextualizing the model’s predictions", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
-        { prompt: "This method of interpretation is effective at establishing the causal chain behind the model’s predictions", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
-        { prompt: "This method of interpretation is effective at conveying information about the model’s predictions", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
-        { prompt: "I would be comfortable with this kind of technology being used to detect whether someone blinked when their photo was being taken", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
-        { prompt: "I would be comfortable with this kind of technology being used to detect the facial drooping characteristic of a stroke", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
-        { prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
-        { prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
-        { prompt: "I would be comfortable with this kind of technology being used to detect someone’s race", labels: ["1", "2", "3", "4", "5", "6", "7"], required: true },
-      ],
+        // Section 1: Understanding the Model
+        {
+          prompt: "<b>Part 1: Understanding the Model<br></b> I could describe what the model inputs and outputs are",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could describe which properties of the inputs lead to the outputs",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could describe at a high level how those input properties lead to the outputs",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could describe each parameter and calculation going from input to output",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "Given a reasonable amount of time, I could reproduce the model’s actual procedure for prediction",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+
+        // Section 2: Implementation
+        {
+          prompt: "<b>Part 2: Implementation<br></b> I could implement a model like this from scratch",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could implement a model like this using general machine learning software frameworks",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could implement a model like this given pre-built versions of each individual component",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could implement a model like this given a pre-built version of the entire system",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+
+        // Section 3: Trust and Understanding
+        {
+          prompt: "<b>Part 3: Trust and Understanding<br></b> I trust decisions made using a model like this",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "If this model produced an unexpected result, I could figure out why",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "The reasoning behind this system’s decisions can be obtained",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "The reasoning behind this system’s decisions can be challenged",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+
+        // Section 4: Applications and Comfort Level
+        {
+          prompt: "<b>Part 4: Model Applications<br></b> I would be comfortable with this kind of technology being used to detect whether someone blinked when their photo was being taken",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect the facial drooping characteristic of a stroke",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+          ],
       scale_width: 600,
     };
 
+    const featureVisFlowchart = {
+      type: jsPsychMLFlowchart,
+      flowchartTitle: `
+        <b>Pixel salience</b> involves asking which parts of an input were most important for determining the ML model’s output about that input.<br> 
+        By examining how important a given pixel in the input was for the trained model to produce its output and repeating this procedure for every pixel in the input, <br>
+        a map is produced describing which parts of the input were important for producing the output.<br>
+      `,
+      topImageSrc: './images/face.png',
+      bottomImageSrc: './images/feature_visualization2.png',
+      states: {
+        trainedMLModel: [
+          { text: 'Trained ML Model', background: 'lightblue' },
+          { text: 'This ML model achieved a test MSE of 54.07', background: 'yellow' },
+          { text: 'We used transfer learning to train a classification MLP appended to a ResNet50 base', background: 'white', outline: '2px dotted black'},
+        ],
+        pixelSalience: [
+          { text: 'Feature Visualization Algorithm', background: 'lightblue' },
+          { text: "This algorithm creates & visualizes the type of input that would cause a specific component or 'functional unit' of the trained model, such as a neuron or filter, to activate most strongly.", background: 'yellow' },
+          { text: "We implemented Activation Maximization with bilateral blurring, where each filter's activation serves as the objective for an optimization process. This process begins with random noise inputs and refines them over 150 iterations.", background: 'white', outline: '2px dotted black' }
+        ],
+      },
+      trustworthinessScore: 'Trustworthy: 73',
+    };
+    // Survey questions for attitude on ML feature visualization 
+    const featureVisualizationSurvey = {
+      type: jsPsychSurveyLikert,
+      preamble: `
+        <p><br>Consider black box ML models for the facial expression recognition task with <b>feature visualization</b> when answering the following questions.
+         <br><br> Using the likert scale, rate how much you agree with each statement <br><br> Options range from 1: Strongly Disagree to 7: Strongly Agree. </p>
+      `,
+      questions: [
+        // Section 1: Understanding the Model
+        {
+          prompt: "<b>Part 1: Understanding the Model<br></b> I could describe what the model inputs and outputs are",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could describe which properties of the inputs lead to the outputs",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could describe at a high level how those input properties lead to the outputs",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could describe each parameter and calculation going from input to output",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "Given a reasonable amount of time, I could reproduce the model’s actual procedure for prediction",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+
+        // Section 2: Implementation
+        {
+          prompt: "<b>Part 2: Implementation<br></b> I could implement a model like this from scratch",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could implement a model like this using general machine learning software frameworks",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could implement a model like this given pre-built versions of each individual component",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could implement a model like this given a pre-built version of the entire system",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+
+        // Section 3: Trust and Understanding
+        {
+          prompt: "<b>Part 3: Trust and Understanding<br></b> I trust decisions made using a model like this",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "If this model produced an unexpected result, I could figure out why",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "The reasoning behind this system’s decisions can be obtained",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "The reasoning behind this system’s decisions can be challenged",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+
+        // Section 4: Applications and Comfort Level
+        {
+          prompt: "<b>Part 4: Model Applications<br></b> I would be comfortable with this kind of technology being used to detect whether someone blinked when their photo was being taken",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect the facial drooping characteristic of a stroke",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+          ],
+      scale_width: 600,
+    };
+
+    // Flowchart for pixel salience 1 (individual pixel importance)
     const pixelSalienceFlowchart = {
       type: jsPsychMLFlowchart,
       flowchartTitle: `
-        <b>Pixel salience</b> involves asking which parts of an input were most important for determining the ML model’s output about that input. 
-        By examining how important a given pixel in the input was for the trained model to produce its output and repeating this procedure for every pixel in the input, 
-        a map is produced describing which parts of the input were important for producing the output.
+        <b>Pixel salience</b> involves asking which parts of an input were most important for determining the ML model’s output about that input.<br> 
+        By examining how important a given pixel in the input was for the trained model to produce its output and repeating this procedure for every pixel in the input, <br>
+        a map is produced describing which parts of the input were important for producing the output.<br>
       `,
       topImageSrc: './images/face.png',
       bottomImageSrc: './images/pixel_salience.png',
       states: {
         trainedMLModel: [
           { text: 'Trained ML Model', background: 'lightblue' },
-          { text: 'State 2: Description of Model', background: 'yellow' },
+          { text: 'This ML model achieved a test MSE of 54.07', background: 'yellow' },
+          { text: 'We used transfer learning to train a classification MLP appended to a ResNet50 base', background: 'white', outline: '2px dotted black'},
         ],
         pixelSalience: [
           { text: 'Pixel Salience Algorithm', background: 'lightblue' },
-          { text: 'State 2: Explanation of Salience', background: 'green' },
+          { text: 'This algorithm uses a pair of input and output to approximate the function relating them. Then, it estimates what that function would have output if some piece of the input - in this case a pixel - was missing. Finally, it returns the difference between outputs produced with and without the missing piece.', background: 'yellow' },
+          { text: 'We implemented Shapley Additive Explanations, training partition explainers using blurring masks on single-sample batches for no more than 50,000 evaluations.', background: 'white', outline: '2px dotted black' }
         ],
       },
       trustworthinessScore: 'Trustworthy: 82',
     };
 
+    // Flowchart for pixel salience 2 (heatmap)
+    const pixelSalienceFlowchart2 = {
+      type: jsPsychMLFlowchart,
+      flowchartTitle: `
+        <b>Pixel salience</b> involves asking which parts of an input were most important for determining the ML model’s output about that input.<br> 
+        By examining how important a given pixel in the input was for the trained model to produce its output and repeating this procedure for every pixel in the input, <br>
+        a map is produced describing which parts of the input were important for producing the output.<br>
+      `,
+      topImageSrc: './images/face.png',
+      bottomImageSrc: './images/pixel_salience2.png',
+      states: {
+        trainedMLModel: [
+          { text: 'Trained ML Model', background: 'lightblue' },
+          { text: 'This ML model achieved a test MSE of 100.37', background: 'yellow' },
+          { text: 'We fine-tuned a vision transformer model base for 200 epochs to generate this model', background: 'white', outline: '2px dotted black'},
+        ],
+        pixelSalience: [
+          { text: 'Pixel Salience Algorithm', background: 'lightblue' },
+          { text: 'This algorithm asks how the model’s component responsible for understanding the relationship between a single pixel and every other pixel in the input responded for a specific input. The result, illustrating which pixels were overall most important for a given prediction, is overlayed over the input.', background: 'white', outline: '2px dotted black' },
+          // { text: 'We implemented Shapley Additive Explanations, training partition explainers using blurring masks on single-sample batches for no more than 50,000 evaluations.', background: 'white', outline: '2px dotted black' }
+        ],
+      },
+      trustworthinessScore: 'Trustworthy: 82',
+    };
+
+    // Flowchart for linguistic explanation
+    const linguisticFlowchart = {
+      type: jsPsychMLFlowchart,
+      flowchartTitle: `
+        <b>Pixel salience</b> involves asking which parts of an input were most important for determining the ML model’s output about that input.<br> 
+        By examining how important a given pixel in the input was for the trained model to produce its output and repeating this procedure for every pixel in the input, <br>
+        a map is produced describing which parts of the input were important for producing the output.<br>
+      `,
+      topImageSrc: './images/face.png',
+      bottomImageSrc: './images/linguistic_explanation.png',
+      states: {
+        trainedMLModel: [
+          { text: 'Trained ML Model', background: 'lightblue' },
+          { text: 'This ML model achieved a test MSE of 66.72', background: 'yellow' },
+          { text: 'We fine-tuned a vision transformer model base for 200 epochs to generate this model', background: 'white', outline: '2px dotted black'},
+        ],
+        pixelSalience: [
+          { text: 'Language Model', background: 'lightblue' },
+          { text: 'The language model applies a neural network trained in tandem with the trustworthiness algorithm to express that algorithm’s internal state with human language.', background: 'yellow'},
+          { text: 'This language model was trained on a large corpus of English text and evaluated for explanatory quality using reinforcement learning with human feedback', background: 'white', outline: '2px dotted black' }
+        ],
+      },
+      trustworthinessScore: 'Trustworthy: 82',
+    };
+
+    // Survey questions for attitude on individual pixel importance
+    const pixelSalienceSurvey = {
+      type: jsPsychSurveyLikert,
+      preamble: `
+        <p><br>Consider black box ML models for the facial expression recognition task with <b>pixel salience</b> when answering the following questions.
+         <br><br> Using the likert scale, rate how much you agree with each statement <br><br> Options range from 1: Strongly Disagree to 7: Strongly Agree. </p>
+      `,
+      questions: [
+        // Section 1: Understanding the Model
+        {
+          prompt: "<b>Part 1: Understanding the Model<br></b> I could describe what the model inputs and outputs are",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could describe which properties of the inputs lead to the outputs",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could describe at a high level how those input properties lead to the outputs",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could describe each parameter and calculation going from input to output",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "Given a reasonable amount of time, I could reproduce the model’s actual procedure for prediction",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+
+        // Section 2: Implementation
+        {
+          prompt: "<b>Part 2: Implementation<br></b> I could implement a model like this from scratch",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could implement a model like this using general machine learning software frameworks",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could implement a model like this given pre-built versions of each individual component",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could implement a model like this given a pre-built version of the entire system",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+
+        // Section 3: Trust and Understanding
+        {
+          prompt: "<b>Part 3: Trust and Understanding<br></b> I trust decisions made using a model like this",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "If this model produced an unexpected result, I could figure out why",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "The reasoning behind this system’s decisions can be obtained",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "The reasoning behind this system’s decisions can be challenged",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+
+        // Section 4: Applications and Comfort Level
+        {
+          prompt: "<b>Part 4: Model Applications<br></b> I would be comfortable with this kind of technology being used to detect whether someone blinked when their photo was being taken",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect the facial drooping characteristic of a stroke",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+          ],
+      scale_width: 600,
+    };
+
+    // Survey questions for attitude on pixel importance (heatmap)
+    const pixelSalienceSurvey2 = {
+      type: jsPsychSurveyLikert,
+      preamble: `
+        <p><br>Consider black box ML models for the facial expression recognition task with <b>pixel salience</b> when answering the following questions.
+         <br><br> Using the likert scale, rate how much you agree with each statement <br><br> Options range from 1: Strongly Disagree to 7: Strongly Agree. </p>
+      `,
+      questions: [
+        // Section 1: Understanding the Model
+        {
+          prompt: "<b>Part 1: Understanding the Model<br></b> I could describe what the model inputs and outputs are",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could describe which properties of the inputs lead to the outputs",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could describe at a high level how those input properties lead to the outputs",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could describe each parameter and calculation going from input to output",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "Given a reasonable amount of time, I could reproduce the model’s actual procedure for prediction",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+
+        // Section 2: Implementation
+        {
+          prompt: "<b>Part 2: Implementation<br></b> I could implement a model like this from scratch",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could implement a model like this using general machine learning software frameworks",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could implement a model like this given pre-built versions of each individual component",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could implement a model like this given a pre-built version of the entire system",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+
+        // Section 3: Trust and Understanding
+        {
+          prompt: "<b>Part 3: Trust and Understanding<br></b> I trust decisions made using a model like this",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "If this model produced an unexpected result, I could figure out why",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "The reasoning behind this system’s decisions can be obtained",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "The reasoning behind this system’s decisions can be challenged",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+
+        // Section 4: Applications and Comfort Level
+        {
+          prompt: "<b>Part 4: Model Applications<br></b> I would be comfortable with this kind of technology being used to detect whether someone blinked when their photo was being taken",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect the facial drooping characteristic of a stroke",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+          ],
+      scale_width: 600,
+    };
 
     // Continue button trial
     const continueButton = {
@@ -178,10 +658,306 @@
         },
     };
 
+    // Introductory text about interpretable ML methods
+    const introMethods = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: `
+        <p>Critics have pointed out the potential harm inherent in black box ML. In response, various methods for interpreting such models’ behavior have been developed. 
+          <br> We will now present some of those methods and describe how they tackle the problem of interpretability in machine learning. 
+          <br> We will carry on using the facial expression recognition task to illustrate how these methods work.</p>
+        <p>One method of interpretable ML is <b>feature visualization</b>.</p>
+      `,
+      choices: ['Continue'],
+    };
+
+    // Introductory text about pixel salience
+    const introPixSali = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: `
+        <p>Another method of interpretable ML is <b>pixel salience</b>.</p>
+      `,
+      choices: ['Continue'],
+    };
+
+    // Introductory text about pixel salience
+    const introPixSali2 = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: `
+        <p>There are multiple ways of visualizing <b>pixel salience</b>. Another approach to <b>pixel salience</b> is to overlay a heatmap of the importance of each region over the input image.</p>
+      `,
+      choices: ['Continue'],
+    };
+
+    // Introductory text about modular development
+    const introModular = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: `
+        <p>Another method of interpretable ML is <b>modular development</b>.</p>
+      `,
+      choices: ['Continue'],
+    };
+
+    // Flowchart for modular development
+    const modularFlowchart = {
+      type: jsPsychMLFlowchartModularDev,
+      flowchartTitle: `
+        <br><b>Modular development</b> involves restricting the scope of black box ML to the problem’s objective properties and <br> using different, transparent methods to combine those objective properties into subjective evaluations.<br>
+      `,
+      topImageSrc: './images/face.png',
+      bottomImageSrc: './images/modular_dev.png',
+      states: {
+        facialStruct: [
+          { text: 'Module 1: Facial Structure Extractor', background: 'lightblue' },
+          { text: 'We used a pretrained keypoint detector from the Dlib package to measure & isolate facial features in pixel space for texture and hue extraction', background: 'yellow' },
+          { text: 'Our downstream texture and hue extractors rely on the output from this module, guaranteeing they are applied to the face rather than other parts of the image (e.g. the background)', background: 'white', outline: '2px dotted black'},
+        ],
+        facialText: [
+          { text: 'Module 3: Facial Texture Extractor', background: 'lightblue' },
+          { text: 'We used a Haralick feature calculator from the Mahotas package to measure texture properties of the face', background: 'yellow'},
+          { text: 'The 13 Haralick features are given by these 13 operations on the adjacency matrix describing trends in the luminance of neighboring pixels over some input', background: 'white', outline: '2px dotted black' }
+        ],
+        facialHue: [
+          { text: 'Module 2: Facial Hue Extractor', background: 'lightblue' },
+          { text: 'We used a color histogram extraction tool from the openCV package to measure facial hue', background: 'white', outline: '2px dotted black' },
+        ],
+        decisionModule: [
+          { text: 'Decision Module', background: 'lightblue' },
+          { text: "The final decisions are produced by a transparent LASSO regression decision module, revealing how inputs are used. It achieved a test MSE of 42.18, with regularization set via grid search.", background: 'yellow' },
+          { text: 'Our visualization below highlights the color, structure, and texture coefficients retained after regularization, with empty spaces (color, texture) and "x" marks (structure) indicating features with less predictive value for human ratings.', background: 'white', outline: '2px dotted black' },
+        ],
+      },
+      trustworthinessScore: '',
+    }
+
+    // Survey questions for attitude on ML facial recognition
+    const modularSurvey = {
+      type: jsPsychSurveyLikert,
+      preamble: `
+        <p><br>Consider black box ML models for the facial expression recognition task with <b>modular development</b> when answering the following questions.
+         <br><br> Using the likert scale, rate how much you agree with each statement <br><br> Options range from 1: Strongly Disagree to 7: Strongly Agree. </p>
+      `,
+      questions: [
+        // Section 1: Understanding the Model
+        {
+          prompt: "<b>Part 1: Understanding the Model<br></b> I could describe what the model inputs and outputs are",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could describe which properties of the inputs lead to the outputs",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could describe at a high level how those input properties lead to the outputs",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could describe each parameter and calculation going from input to output",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "Given a reasonable amount of time, I could reproduce the model’s actual procedure for prediction",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+
+        // Section 2: Implementation
+        {
+          prompt: "<b>Part 2: Implementation<br></b> I could implement a model like this from scratch",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could implement a model like this using general machine learning software frameworks",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could implement a model like this given pre-built versions of each individual component",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could implement a model like this given a pre-built version of the entire system",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+
+        // Section 3: Trust and Understanding
+        {
+          prompt: "<b>Part 3: Trust and Understanding<br></b> I trust decisions made using a model like this",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "If this model produced an unexpected result, I could figure out why",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "The reasoning behind this system’s decisions can be obtained",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "The reasoning behind this system’s decisions can be challenged",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+
+        // Section 4: Applications and Comfort Level
+        {
+          prompt: "<b>Part 4: Model Applications<br></b> I would be comfortable with this kind of technology being used to detect whether someone blinked when their photo was being taken",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect the facial drooping characteristic of a stroke",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+          ],
+      scale_width: 600,
+    };
+    // Introductory text about modular development
+    const introLinguisticExp = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: `
+        <p>Finally, another method of interpretable ML is <b>linguistic explanation</b>.</p>
+      `,
+      choices: ['Continue'],
+    };
+
+    // Survey questions for attitude on ML facial recognition
+    const linguisticExpSurvey = {
+      type: jsPsychSurveyLikert,
+      preamble: `
+        <p><br>Consider black box ML models for the facial expression recognition task with <b>linguistic explanation</b> when answering the following questions.
+         <br><br> Using the likert scale, rate how much you agree with each statement <br><br> Options range from 1: Strongly Disagree to 7: Strongly Agree. </p>
+      `,
+      questions: [
+        // Section 1: Understanding the Model
+        {
+          prompt: "<b>Part 1: Understanding the Model<br></b> I could describe what the model inputs and outputs are",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could describe which properties of the inputs lead to the outputs",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could describe at a high level how those input properties lead to the outputs",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could describe each parameter and calculation going from input to output",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "Given a reasonable amount of time, I could reproduce the model’s actual procedure for prediction",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+
+        // Section 2: Implementation
+        {
+          prompt: "<b>Part 2: Implementation<br></b> I could implement a model like this from scratch",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could implement a model like this using general machine learning software frameworks",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could implement a model like this given pre-built versions of each individual component",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I could implement a model like this given a pre-built version of the entire system",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+
+        // Section 3: Trust and Understanding
+        {
+          prompt: "<b>Part 3: Trust and Understanding<br></b> I trust decisions made using a model like this",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "If this model produced an unexpected result, I could figure out why",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "The reasoning behind this system’s decisions can be obtained",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "The reasoning behind this system’s decisions can be challenged",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+
+        // Section 4: Applications and Comfort Level
+        {
+          prompt: "<b>Part 4: Model Applications<br></b> I would be comfortable with this kind of technology being used to detect whether someone blinked when their photo was being taken",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect the facial drooping characteristic of a stroke",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+        {
+          prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
+          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+          required: true,
+        },
+          ],
+      scale_width: 600,
+    };
     // Display data at the end of the experiment
     const endTrial = {
         type: jsPsychHtmlKeyboardResponse,
-        stimulus: `<p>Thank you for participating!</p>`,
+        stimulus: `<p>That concludes our study today. Thank you for participating!</p>`,
         on_finish: () => {
             jsPsych.data.displayData(); // Opens data in a new tab
         },
@@ -189,15 +965,29 @@
 
     // Combine both trials into a concurrent timeline
     const timeline = [
-        hello_trial,
-        survey_trial,
-        position_question,
-        familiarity_ml,
-        introBox,
-        mlBlackBox,
-        facialRecognition,
-        facialRecognitionSurvey,
+        // hello_trial,
+        // survey_trial,
+        // position_question,
+        // familiarity_ml,
+        // introBox,
+        // mlBlackBox,
+        // facialRecognition,
+        // facialRecognitionSurvey,
+        // introMethods,
+        featureVisFlowchart,
+        featureVisualizationSurvey,
+        introPixSali,
         pixelSalienceFlowchart,
+        pixelSalienceSurvey,
+        introPixSali2,
+        pixelSalienceFlowchart2,
+        pixelSalienceSurvey2,
+        introModular,
+        modularFlowchart,
+        modularSurvey,
+        introLinguisticExp,
+        linguisticFlowchart,
+        linguisticExpSurvey,
         endTrial,
     ];
 
