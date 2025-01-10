@@ -58,7 +58,7 @@ var jsPsychMLFlowchart = (function (jsPsychModule) {
         // Render the layout
         display_element.innerHTML = `
           <!-- Header Text -->
-          <div style="text-align: center; font-size: 16px; margin-bottom: 20px;">
+          <div style="text-align: center; font-size: 12px; margin-bottom: 20px;">
             ${trial.flowchartTitle}
           </div>
           
@@ -91,8 +91,8 @@ var jsPsychMLFlowchart = (function (jsPsychModule) {
             <div style="width: 100px; border-top: 2px solid black; margin: 0px 0;"></div>
             
             <!-- Trustworthy Score-->
-            <div style="margin-top: 10px; font-size: 16px !important; text-align: center; font-weight: bold;">
-                ${trial.trustworthinessScore}
+            <div style="margin-top: 10px; font-size: 12px !important; text-align: center; font-weight: regular;">
+                'test'
             </div>
             
               <!-- Horizontal Line 2 -->
@@ -126,7 +126,7 @@ var jsPsychMLFlowchart = (function (jsPsychModule) {
           <!-- Navigation Buttons -->
             <button id="continue-button" style="
               padding: 10px 20px;
-              font-size: 16px;
+              font-size: 12px;
               background-color: #4CAF50;
               color: white;
               border: none;

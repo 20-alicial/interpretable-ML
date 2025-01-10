@@ -145,10 +145,8 @@ var jsPsychMLFlowchartModularDev = (function (jsPsychModule) {
               ${trial.states.decisionModule[0].text}
           </div>
 
-
-
           <!-- Trustworthy Score-->
-          <div style="margin-top: 10px; font-size: 16px !important; text-align: center; font-weight: bold;">
+          <div style="margin-top: 10px; font-size: 12px !important; text-align: center; font-weight: bold;">
               ${trial.trustworthinessScore}
             </div>
 

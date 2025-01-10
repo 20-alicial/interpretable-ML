@@ -115,113 +115,139 @@
         imageHeight: 'auto',
         };
 
-    // Survey questions for attitude on ML facial recognition 
-    const facialRecognitionSurvey = {
-      type: jsPsychSurveyLikert,
-      preamble: `
-        <p><br>Now, please consider black box ML technology - or “models” - applied to facial recognition tasks to answer the following questions. <br><br> Using the likert scale, rate how much you agree with each statement <br><br> Options range from 1: Strongly Disagree to 7: Strongly Agree. </p>
-      `,
-      questions: [
-        // Section 1: Understanding the Model
+        const facialRecognitionSurvey = [
+        // Page 1: Understanding the Model
         {
-          prompt: "<b>Part 1: Understanding the Model<br></b> I could describe what the model inputs and outputs are",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could describe which properties of the inputs lead to the outputs",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could describe at a high level how those input properties lead to the outputs",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could describe each parameter and calculation going from input to output",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "Given a reasonable amount of time, I could reproduce the model’s actual procedure for prediction",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-
-        // Section 2: Implementation
-        {
-          prompt: "<b>Part 2: Implementation<br></b> I could implement a model like this from scratch",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could implement a model like this using general machine learning software frameworks",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could implement a model like this given pre-built versions of each individual component",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could implement a model like this given a pre-built version of the entire system",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-
-        // Section 3: Trust and Understanding
-        {
-          prompt: "<b>Part 3: Trust and Understanding<br></b> I trust decisions made using a model like this",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "If this model produced an unexpected result, I could figure out why",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "The reasoning behind this system’s decisions can be obtained",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "The reasoning behind this system’s decisions can be challenged",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-
-        // Section 4: Applications and Comfort Level
-        {
-          prompt: "<b>Part 4: Model Applications<br></b> I would be comfortable with this kind of technology being used to detect whether someone blinked when their photo was being taken",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect the facial drooping characteristic of a stroke",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
+          type: jsPsychSurveyLikert,
+          preamble: `
+            <p><br>Please consider black box ML technology - or “models” - for facial recognition tasks when answering the following questions. <br><br> Using the likert scale, rate how much you agree with each statement <br><br> Options range from 1: Strongly Disagree to 7: Strongly Agree. </p>
+            <p><b>Part 1: Understanding the Model</b></p>
+          `,
+          questions: [
+            {
+              prompt: "I could describe what the model inputs and outputs are",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could describe which properties of the inputs lead to the outputs",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could describe at a high level how those input properties lead to the outputs",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could describe each parameter and calculation going from input to output",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "Given a reasonable amount of time, I could reproduce the model’s actual procedure for prediction",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
           ],
-      scale_width: 600,
-    };
+          scale_width: 600,
+        },
+
+        // Page 2: Implementation
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 2: Implementation</b></p>`,
+          questions: [
+            {
+              prompt: "I could implement a model like this from scratch",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could implement a model like this using general machine learning software frameworks",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could implement a model like this given pre-built versions of each individual component",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could implement a model like this given a pre-built version of the entire system",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+          ],
+          scale_width: 600,
+        },
+
+        // Page 3: Trust and Understanding
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 3: Trust and Understanding</b></p>`,
+          questions: [
+            {
+              prompt: "I trust decisions made using a model like this",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "If this model produced an unexpected result, I could figure out why",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "The reasoning behind this system’s decisions can be obtained",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "The reasoning behind this system’s decisions can be challenged",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+          ],
+          scale_width: 600,
+        },
+
+        // Page 4: Model Applications
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 4: Model Applications</b></p>`,
+          questions: [
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect whether someone blinked when their photo was being taken",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect the facial drooping characteristic of a stroke",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+          ],
+          scale_width: 600,
+        },
+      ];
 
     const featureVisFlowchart = {
       type: jsPsychMLFlowchart,
@@ -246,115 +272,142 @@
       },
       trustworthinessScore: 'Trustworthy: 73',
     };
-    // Survey questions for attitude on ML feature visualization 
-    const featureVisualizationSurvey = {
-      type: jsPsychSurveyLikert,
-      preamble: `
-        <p><br>Consider black box ML models for the facial expression recognition task with <b>feature visualization</b> when answering the following questions.
-         <br><br> Using the likert scale, rate how much you agree with each statement <br><br> Options range from 1: Strongly Disagree to 7: Strongly Agree. </p>
-      `,
-      questions: [
-        // Section 1: Understanding the Model
-        {
-          prompt: "<b>Part 1: Understanding the Model<br></b> I could describe what the model inputs and outputs are",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could describe which properties of the inputs lead to the outputs",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could describe at a high level how those input properties lead to the outputs",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could describe each parameter and calculation going from input to output",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "Given a reasonable amount of time, I could reproduce the model’s actual procedure for prediction",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
 
-        // Section 2: Implementation
+    const featureVisualizationSurvey = [
+        // Page 1: Understanding the Model
         {
-          prompt: "<b>Part 2: Implementation<br></b> I could implement a model like this from scratch",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could implement a model like this using general machine learning software frameworks",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could implement a model like this given pre-built versions of each individual component",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could implement a model like this given a pre-built version of the entire system",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-
-        // Section 3: Trust and Understanding
-        {
-          prompt: "<b>Part 3: Trust and Understanding<br></b> I trust decisions made using a model like this",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "If this model produced an unexpected result, I could figure out why",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "The reasoning behind this system’s decisions can be obtained",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "The reasoning behind this system’s decisions can be challenged",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-
-        // Section 4: Applications and Comfort Level
-        {
-          prompt: "<b>Part 4: Model Applications<br></b> I would be comfortable with this kind of technology being used to detect whether someone blinked when their photo was being taken",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect the facial drooping characteristic of a stroke",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
+          type: jsPsychSurveyLikert,
+          preamble: `
+            <p><br>Please consider black box ML models with <b>feature visualization</b> for facial recognition tasks when answering the following questions. <br><br> Using the likert scale, rate how much you agree with each statement <br><br> Options range from 1: Strongly Disagree to 7: Strongly Agree. </p>
+            <p><b>Part 1: Understanding the Model</b></p>
+          `,
+          questions: [
+            {
+              prompt: "I could describe what the model inputs and outputs are",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could describe which properties of the inputs lead to the outputs",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could describe at a high level how those input properties lead to the outputs",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could describe each parameter and calculation going from input to output",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "Given a reasonable amount of time, I could reproduce the model’s actual procedure for prediction",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
           ],
-      scale_width: 600,
-    };
+          scale_width: 600,
+        },
 
+        // Page 2: Implementation
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 2: Implementation</b></p>`,
+          questions: [
+            {
+              prompt: "I could implement a model like this from scratch",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could implement a model like this using general machine learning software frameworks",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could implement a model like this given pre-built versions of each individual component",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could implement a model like this given a pre-built version of the entire system",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+          ],
+          scale_width: 600,
+        },
+
+        // Page 3: Trust and Understanding
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 3: Trust and Understanding</b></p>`,
+          questions: [
+            {
+              prompt: "I trust decisions made using a model like this",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "If this model produced an unexpected result, I could figure out why",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "The reasoning behind this system’s decisions can be obtained",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "The reasoning behind this system’s decisions can be challenged",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+          ],
+          scale_width: 600,
+        },
+
+        // Page 4: Model Applications
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 4: Model Applications</b></p>`,
+          questions: [
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect whether someone blinked when their photo was being taken",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect the facial drooping characteristic of a stroke",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+          ],
+          scale_width: 600,
+        },
+      ];
+
+    
     // Flowchart for pixel salience 1 (individual pixel importance)
     const pixelSalienceFlowchart = {
       type: jsPsychMLFlowchart,
@@ -377,8 +430,142 @@
           { text: 'We implemented Shapley Additive Explanations, training partition explainers using blurring masks on single-sample batches for no more than 50,000 evaluations.', background: 'white', outline: '2px dotted black' }
         ],
       },
-      trustworthinessScore: 'Trustworthy: 82',
+      trustworthinessScore: 'Trustworthy: 87',
     };
+
+    const pixelSalienceSurvey = [
+        // Page 1: Understanding the Model
+        {
+          type: jsPsychSurveyLikert,
+          preamble: `
+            <p><br>Please consider black box ML models with <b>pixel salience</b> for facial recognition tasks when answering the following questions. <br><br> Using the likert scale, rate how much you agree with each statement <br><br> Options range from 1: Strongly Disagree to 7: Strongly Agree. </p>
+            <p><b>Part 1: Understanding the Model</b></p>
+          `,
+          questions: [
+            {
+              prompt: "I could describe what the model inputs and outputs are",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could describe which properties of the inputs lead to the outputs",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could describe at a high level how those input properties lead to the outputs",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could describe each parameter and calculation going from input to output",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "Given a reasonable amount of time, I could reproduce the model’s actual procedure for prediction",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+          ],
+          scale_width: 600,
+        },
+
+        // Page 2: Implementation
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 2: Implementation</b></p>`,
+          questions: [
+            {
+              prompt: "I could implement a model like this from scratch",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could implement a model like this using general machine learning software frameworks",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could implement a model like this given pre-built versions of each individual component",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could implement a model like this given a pre-built version of the entire system",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+          ],
+          scale_width: 600,
+        },
+
+        // Page 3: Trust and Understanding
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 3: Trust and Understanding</b></p>`,
+          questions: [
+            {
+              prompt: "I trust decisions made using a model like this",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "If this model produced an unexpected result, I could figure out why",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "The reasoning behind this system’s decisions can be obtained",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "The reasoning behind this system’s decisions can be challenged",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+          ],
+          scale_width: 600,
+        },
+
+        // Page 4: Model Applications
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 4: Model Applications</b></p>`,
+          questions: [
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect whether someone blinked when their photo was being taken",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect the facial drooping characteristic of a stroke",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+          ],
+          scale_width: 600,
+        },
+      ];
 
     // Flowchart for pixel salience 2 (heatmap)
     const pixelSalienceFlowchart2 = {
@@ -405,6 +592,140 @@
       trustworthinessScore: 'Trustworthy: 82',
     };
 
+    const pixelSalienceSurvey2 = [
+        // Page 1: Understanding the Model
+        {
+          type: jsPsychSurveyLikert,
+          preamble: `
+            <p><br>Please consider black box ML models with <b>heatmap pixel salience</b> for facial recognition tasks when answering the following questions. <br><br> Using the likert scale, rate how much you agree with each statement <br><br> Options range from 1: Strongly Disagree to 7: Strongly Agree. </p>
+            <p><b>Part 1: Understanding the Model</b></p>
+          `,
+          questions: [
+            {
+              prompt: "I could describe what the model inputs and outputs are",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could describe which properties of the inputs lead to the outputs",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could describe at a high level how those input properties lead to the outputs",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could describe each parameter and calculation going from input to output",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "Given a reasonable amount of time, I could reproduce the model’s actual procedure for prediction",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+          ],
+          scale_width: 600,
+        },
+
+        // Page 2: Implementation
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 2: Implementation</b></p>`,
+          questions: [
+            {
+              prompt: "I could implement a model like this from scratch",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could implement a model like this using general machine learning software frameworks",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could implement a model like this given pre-built versions of each individual component",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could implement a model like this given a pre-built version of the entire system",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+          ],
+          scale_width: 600,
+        },
+
+        // Page 3: Trust and Understanding
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 3: Trust and Understanding</b></p>`,
+          questions: [
+            {
+              prompt: "I trust decisions made using a model like this",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "If this model produced an unexpected result, I could figure out why",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "The reasoning behind this system’s decisions can be obtained",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "The reasoning behind this system’s decisions can be challenged",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+          ],
+          scale_width: 600,
+        },
+
+        // Page 4: Model Applications
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 4: Model Applications</b></p>`,
+          questions: [
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect whether someone blinked when their photo was being taken",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect the facial drooping characteristic of a stroke",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+          ],
+          scale_width: 600,
+        },
+      ];
+
     // Flowchart for linguistic explanation
     const linguisticFlowchart = {
       type: jsPsychMLFlowchart,
@@ -426,224 +747,6 @@
         ],
       },
       trustworthinessScore: 'Trustworthy: 82',
-    };
-
-    // Survey questions for attitude on individual pixel importance
-    const pixelSalienceSurvey = {
-      type: jsPsychSurveyLikert,
-      preamble: `
-        <p><br>Consider black box ML models for the facial expression recognition task with <b>pixel salience</b> when answering the following questions.
-         <br><br> Using the likert scale, rate how much you agree with each statement <br><br> Options range from 1: Strongly Disagree to 7: Strongly Agree. </p>
-      `,
-      questions: [
-        // Section 1: Understanding the Model
-        {
-          prompt: "<b>Part 1: Understanding the Model<br></b> I could describe what the model inputs and outputs are",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could describe which properties of the inputs lead to the outputs",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could describe at a high level how those input properties lead to the outputs",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could describe each parameter and calculation going from input to output",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "Given a reasonable amount of time, I could reproduce the model’s actual procedure for prediction",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-
-        // Section 2: Implementation
-        {
-          prompt: "<b>Part 2: Implementation<br></b> I could implement a model like this from scratch",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could implement a model like this using general machine learning software frameworks",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could implement a model like this given pre-built versions of each individual component",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could implement a model like this given a pre-built version of the entire system",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-
-        // Section 3: Trust and Understanding
-        {
-          prompt: "<b>Part 3: Trust and Understanding<br></b> I trust decisions made using a model like this",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "If this model produced an unexpected result, I could figure out why",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "The reasoning behind this system’s decisions can be obtained",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "The reasoning behind this system’s decisions can be challenged",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-
-        // Section 4: Applications and Comfort Level
-        {
-          prompt: "<b>Part 4: Model Applications<br></b> I would be comfortable with this kind of technology being used to detect whether someone blinked when their photo was being taken",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect the facial drooping characteristic of a stroke",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-          ],
-      scale_width: 600,
-    };
-
-    // Survey questions for attitude on pixel importance (heatmap)
-    const pixelSalienceSurvey2 = {
-      type: jsPsychSurveyLikert,
-      preamble: `
-        <p><br>Consider black box ML models for the facial expression recognition task with <b>pixel salience</b> when answering the following questions.
-         <br><br> Using the likert scale, rate how much you agree with each statement <br><br> Options range from 1: Strongly Disagree to 7: Strongly Agree. </p>
-      `,
-      questions: [
-        // Section 1: Understanding the Model
-        {
-          prompt: "<b>Part 1: Understanding the Model<br></b> I could describe what the model inputs and outputs are",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could describe which properties of the inputs lead to the outputs",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could describe at a high level how those input properties lead to the outputs",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could describe each parameter and calculation going from input to output",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "Given a reasonable amount of time, I could reproduce the model’s actual procedure for prediction",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-
-        // Section 2: Implementation
-        {
-          prompt: "<b>Part 2: Implementation<br></b> I could implement a model like this from scratch",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could implement a model like this using general machine learning software frameworks",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could implement a model like this given pre-built versions of each individual component",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could implement a model like this given a pre-built version of the entire system",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-
-        // Section 3: Trust and Understanding
-        {
-          prompt: "<b>Part 3: Trust and Understanding<br></b> I trust decisions made using a model like this",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "If this model produced an unexpected result, I could figure out why",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "The reasoning behind this system’s decisions can be obtained",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "The reasoning behind this system’s decisions can be challenged",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-
-        // Section 4: Applications and Comfort Level
-        {
-          prompt: "<b>Part 4: Model Applications<br></b> I would be comfortable with this kind of technology being used to detect whether someone blinked when their photo was being taken",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect the facial drooping characteristic of a stroke",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-          ],
-      scale_width: 600,
     };
 
     // Continue button trial
@@ -727,115 +830,141 @@
       trustworthinessScore: '',
     }
 
-    // Survey questions for attitude on ML facial recognition
-    const modularSurvey = {
-      type: jsPsychSurveyLikert,
-      preamble: `
-        <p><br>Consider black box ML models for the facial expression recognition task with <b>modular development</b> when answering the following questions.
-         <br><br> Using the likert scale, rate how much you agree with each statement <br><br> Options range from 1: Strongly Disagree to 7: Strongly Agree. </p>
-      `,
-      questions: [
-        // Section 1: Understanding the Model
+    const modularSurvey = [
+        // Page 1: Understanding the Model
         {
-          prompt: "<b>Part 1: Understanding the Model<br></b> I could describe what the model inputs and outputs are",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could describe which properties of the inputs lead to the outputs",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could describe at a high level how those input properties lead to the outputs",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could describe each parameter and calculation going from input to output",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "Given a reasonable amount of time, I could reproduce the model’s actual procedure for prediction",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-
-        // Section 2: Implementation
-        {
-          prompt: "<b>Part 2: Implementation<br></b> I could implement a model like this from scratch",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could implement a model like this using general machine learning software frameworks",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could implement a model like this given pre-built versions of each individual component",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could implement a model like this given a pre-built version of the entire system",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-
-        // Section 3: Trust and Understanding
-        {
-          prompt: "<b>Part 3: Trust and Understanding<br></b> I trust decisions made using a model like this",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "If this model produced an unexpected result, I could figure out why",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "The reasoning behind this system’s decisions can be obtained",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "The reasoning behind this system’s decisions can be challenged",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-
-        // Section 4: Applications and Comfort Level
-        {
-          prompt: "<b>Part 4: Model Applications<br></b> I would be comfortable with this kind of technology being used to detect whether someone blinked when their photo was being taken",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect the facial drooping characteristic of a stroke",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
+          type: jsPsychSurveyLikert,
+          preamble: `
+            <p><br>Please consider black box ML models with <b>modular development</b> for facial recognition tasks when answering the following questions. <br><br> Using the likert scale, rate how much you agree with each statement <br><br> Options range from 1: Strongly Disagree to 7: Strongly Agree. </p>
+            <p><b>Part 1: Understanding the Model</b></p>
+          `,
+          questions: [
+            {
+              prompt: "I could describe what the model inputs and outputs are",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could describe which properties of the inputs lead to the outputs",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could describe at a high level how those input properties lead to the outputs",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could describe each parameter and calculation going from input to output",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "Given a reasonable amount of time, I could reproduce the model’s actual procedure for prediction",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
           ],
-      scale_width: 600,
-    };
-    // Introductory text about modular development
+          scale_width: 600,
+        },
+
+        // Page 2: Implementation
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 2: Implementation</b></p>`,
+          questions: [
+            {
+              prompt: "I could implement a model like this from scratch",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could implement a model like this using general machine learning software frameworks",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could implement a model like this given pre-built versions of each individual component",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could implement a model like this given a pre-built version of the entire system",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+          ],
+          scale_width: 600,
+        },
+
+        // Page 3: Trust and Understanding
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 3: Trust and Understanding</b></p>`,
+          questions: [
+            {
+              prompt: "I trust decisions made using a model like this",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "If this model produced an unexpected result, I could figure out why",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "The reasoning behind this system’s decisions can be obtained",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "The reasoning behind this system’s decisions can be challenged",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+          ],
+          scale_width: 600,
+        },
+
+        // Page 4: Model Applications
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 4: Model Applications</b></p>`,
+          questions: [
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect whether someone blinked when their photo was being taken",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect the facial drooping characteristic of a stroke",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+          ],
+          scale_width: 600,
+        },
+      ];
+
+    // Introductory text about linguistic explanation
     const introLinguisticExp = {
       type: jsPsychHtmlButtonResponse,
       stimulus: `
@@ -844,114 +973,140 @@
       choices: ['Continue'],
     };
 
-    // Survey questions for attitude on ML facial recognition
-    const linguisticExpSurvey = {
-      type: jsPsychSurveyLikert,
-      preamble: `
-        <p><br>Consider black box ML models for the facial expression recognition task with <b>linguistic explanation</b> when answering the following questions.
-         <br><br> Using the likert scale, rate how much you agree with each statement <br><br> Options range from 1: Strongly Disagree to 7: Strongly Agree. </p>
-      `,
-      questions: [
-        // Section 1: Understanding the Model
+    // Survey questions for attitude on ML facial recognition with linguistic explanation
+    const linguisticExpSurvey = [
+        // Page 1: Understanding the Model
         {
-          prompt: "<b>Part 1: Understanding the Model<br></b> I could describe what the model inputs and outputs are",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could describe which properties of the inputs lead to the outputs",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could describe at a high level how those input properties lead to the outputs",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could describe each parameter and calculation going from input to output",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "Given a reasonable amount of time, I could reproduce the model’s actual procedure for prediction",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-
-        // Section 2: Implementation
-        {
-          prompt: "<b>Part 2: Implementation<br></b> I could implement a model like this from scratch",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could implement a model like this using general machine learning software frameworks",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could implement a model like this given pre-built versions of each individual component",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I could implement a model like this given a pre-built version of the entire system",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-
-        // Section 3: Trust and Understanding
-        {
-          prompt: "<b>Part 3: Trust and Understanding<br></b> I trust decisions made using a model like this",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "If this model produced an unexpected result, I could figure out why",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "The reasoning behind this system’s decisions can be obtained",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "The reasoning behind this system’s decisions can be challenged",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-
-        // Section 4: Applications and Comfort Level
-        {
-          prompt: "<b>Part 4: Model Applications<br></b> I would be comfortable with this kind of technology being used to detect whether someone blinked when their photo was being taken",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect the facial drooping characteristic of a stroke",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
-        {
-          prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
-          labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
-          required: true,
-        },
+          type: jsPsychSurveyLikert,
+          preamble: `
+            <p><br>Please consider black box ML models with <b>linguistic explanation</b> for facial recognition tasks when answering the following questions. <br><br> Using the likert scale, rate how much you agree with each statement <br><br> Options range from 1: Strongly Disagree to 7: Strongly Agree. </p>
+            <p><b>Part 1: Understanding the Model</b></p>
+          `,
+          questions: [
+            {
+              prompt: "I could describe what the model inputs and outputs are",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could describe which properties of the inputs lead to the outputs",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could describe at a high level how those input properties lead to the outputs",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could describe each parameter and calculation going from input to output",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "Given a reasonable amount of time, I could reproduce the model’s actual procedure for prediction",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
           ],
-      scale_width: 600,
-    };
+          scale_width: 600,
+        },
+
+        // Page 2: Implementation
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 2: Implementation</b></p>`,
+          questions: [
+            {
+              prompt: "I could implement a model like this from scratch",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could implement a model like this using general machine learning software frameworks",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could implement a model like this given pre-built versions of each individual component",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I could implement a model like this given a pre-built version of the entire system",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+          ],
+          scale_width: 600,
+        },
+
+        // Page 3: Trust and Understanding
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 3: Trust and Understanding</b></p>`,
+          questions: [
+            {
+              prompt: "I trust decisions made using a model like this",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "If this model produced an unexpected result, I could figure out why",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "The reasoning behind this system’s decisions can be obtained",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "The reasoning behind this system’s decisions can be challenged",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+          ],
+          scale_width: 600,
+        },
+
+        // Page 4: Model Applications
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 4: Model Applications</b></p>`,
+          questions: [
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect whether someone blinked when their photo was being taken",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect the facial drooping characteristic of a stroke",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+            {
+              prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
+              labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
+              required: true,
+            },
+          ],
+          scale_width: 600,
+        },
+      ];
     // Display data at the end of the experiment
     const endTrial = {
         type: jsPsychHtmlKeyboardResponse,
