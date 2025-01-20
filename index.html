@@ -66,7 +66,7 @@
     // Intro box
     const introBox = {
       type: jsPsychClickableBox,
-      boxID: 'box1',
+      boxID: 'intro_instructions_box',
       lineText: 'Thank you for participating in our study today. We will be asking you to share your thoughts about interpretable machine learning. Please read the instructions carefully.',
       initialText: 'Throughout this study, there will be optional opportunities to interact with various elements and reveal extra information. Interactive elements will appear in blue boxes which may be clicked. Try it out with this box!',
       states: [
@@ -78,7 +78,7 @@
     // ML Black Box trial
     const mlBlackBox = {
         type: jsPsychClickableBox,
-        boxID: 'box1',
+        boxID: 'ML_FER_example_box',
         lineText: 'Many modern machine learning (ML) technologies are “black boxes”. In this context, a black box refers to a system which we understand in terms of its inputs and outputs, leaving the internal elements which negotiate the transformation from input to output obscure.',
         initialText: 'Click here to see a schematic diagram describing black box ML performing a task.',
         states: [
@@ -90,7 +90,7 @@
 
     const facialRecognition = {
         type: jsPsychDualClickableBox,
-        lineText: 'One common ML application is facial expression recognition. Facial expression recognition uses ML to identify the emotions or attributes characterizing a human face. <br> Some examples of inputs and outputs using ML to evaluate the "trustworthiness" of a face are presented below.',
+        lineText: 'One common ML application is facial expression recognition. Facial expression recognition uses ML to identify the emotions or attributes characterizing a human face. <br>For example, it can be used to detect age, whether someone is happy or sad, and even whether someone is suspicious through cues such as stress or nervousness. <br> Some examples of inputs and outputs using ML to evaluate the age, gender, happiness, and trustworthiness of a face are presented below.',
         leftBox: {
             text: 'Inputs',
             background: 'lightblue',
@@ -213,11 +213,11 @@
           scale_width: 600,
         },
 
-        // Page 4: Model Interpretability 
+        // Page 4: Model Predictions
         {
           type: jsPsychSurveyLikert,
           show_prev_button: true,
-          preamble: `<p><b>Part 4: Model Interpretability</b></p>`,
+          preamble: `<p><b>Part 4: Model Predictions</b></p>`,
           questions: [
             {
               prompt: "This method of interpretation is effective at contextualizing the model’s predictions",
@@ -238,8 +238,8 @@
           scale_width: 600,
         },
 
-        // Page 5: Model Applications
-        {
+       // Page 5: Model Applications
+       {
           type: jsPsychSurveyLikert,
           show_prev_button: true,
           preamble: `<p><b>Part 5: Model Applications</b></p>`,
@@ -258,7 +258,17 @@
               prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
               labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
               required: true,
-            },
+            }
+          ],
+          scale_width: 600,
+        },
+
+        // Page 5: Model Applications Continued
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 5: Model Applications (Continued) </b></p>`,
+          questions: [
             {
               prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
               labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
@@ -268,11 +278,20 @@
               prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
               labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
               required: true,
-            },
+            }
           ],
           scale_width: 600,
         },
       ];
+
+    // Introductory text about pixel salience
+    const introFeatureVis = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: `
+        <p>One method of interpretable ML is <b>feature visualization</b>.</p>
+      `,
+      choices: ['Continue'],
+    };
 
     const featureVisFlowchart = {
       type: jsPsychMLFlowchart,
@@ -556,11 +575,11 @@
           scale_width: 600,
         },
 
-        // Page 4: Model Interpretability 
+        // Page 4: Model Predictions
         {
           type: jsPsychSurveyLikert,
           show_prev_button: true,
-          preamble: `<p><b>Part 4: Model Interpretability</b></p>`,
+          preamble: `<p><b>Part 4: Model Predictions</b></p>`,
           questions: [
             {
               prompt: "This method of interpretation is effective at contextualizing the model’s predictions",
@@ -601,7 +620,17 @@
               prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
               labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
               required: true,
-            },
+            }
+          ],
+          scale_width: 600,
+        },
+
+        // Page 5: Model Applications Continued
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 5: Model Applications (Continued) </b></p>`,
+          questions: [
             {
               prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
               labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
@@ -611,7 +640,7 @@
               prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
               labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
               required: true,
-            },
+            }
           ],
           scale_width: 600,
         },
@@ -740,11 +769,11 @@
           scale_width: 600,
         },
 
-        // Page 4: Model Interpretability 
+        // Page 4: Model Predictions
         {
           type: jsPsychSurveyLikert,
           show_prev_button: true,
-          preamble: `<p><b>Part 4: Model Interpretability</b></p>`,
+          preamble: `<p><b>Part 4: Model Predictions</b></p>`,
           questions: [
             {
               prompt: "This method of interpretation is effective at contextualizing the model’s predictions",
@@ -785,7 +814,17 @@
               prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
               labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
               required: true,
-            },
+            }
+          ],
+          scale_width: 600,
+        },
+
+        // Page 5: Model Applications Continued
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 5: Model Applications (Continued) </b></p>`,
+          questions: [
             {
               prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
               labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
@@ -795,7 +834,7 @@
               prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
               labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
               required: true,
-            },
+            }
           ],
           scale_width: 600,
         },
@@ -841,7 +880,6 @@
         <p>Critics have pointed out the potential harm inherent in black box ML. In response, various methods for interpreting such models’ behavior have been developed. 
           <br> We will now present some of those methods and describe how they tackle the problem of interpretability in machine learning. 
           <br> We will carry on using the facial expression recognition task to illustrate how these methods work.</p>
-        <p>One method of interpretable ML is <b>feature visualization</b>.</p>
       `,
       choices: ['Continue'],
     };
@@ -850,7 +888,7 @@
     const introPixSali = {
       type: jsPsychHtmlButtonResponse,
       stimulus: `
-        <p>Another method of interpretable ML is <b>pixel salience</b>.</p>
+        <p>One method of interpretable ML is <b>pixel salience</b>.</p>
       `,
       choices: ['Continue'],
     };
@@ -859,7 +897,7 @@
     const introPixSali2 = {
       type: jsPsychHtmlButtonResponse,
       stimulus: `
-        <p>There are multiple ways of visualizing <b>pixel salience</b>. Another approach to <b>pixel salience</b> is to overlay a heatmap of the importance of each region over the input image.</p>
+        <p>One method of interpretable ML is <b>pixel salience</b>.</p>
       `,
       choices: ['Continue'],
     };
@@ -868,7 +906,7 @@
     const introModular = {
       type: jsPsychHtmlButtonResponse,
       stimulus: `
-        <p>Another method of interpretable ML is <b>modular development</b>.</p>
+        <p>One method of interpretable ML is <b>modular development</b>.</p>
       `,
       choices: ['Continue'],
     };
@@ -1003,11 +1041,11 @@
           scale_width: 600,
         },
 
-        // Page 4: Model Interpretability 
+        // Page 4: Model Predictions
         {
           type: jsPsychSurveyLikert,
           show_prev_button: true,
-          preamble: `<p><b>Part 4: Model Interpretability</b></p>`,
+          preamble: `<p><b>Part 4: Model Predictions</b></p>`,
           questions: [
             {
               prompt: "This method of interpretation is effective at contextualizing the model’s predictions",
@@ -1048,7 +1086,17 @@
               prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
               labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
               required: true,
-            },
+            }
+          ],
+          scale_width: 600,
+        },
+
+        // Page 5: Model Applications Continued
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 5: Model Applications (Continued) </b></p>`,
+          questions: [
             {
               prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
               labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
@@ -1058,7 +1106,7 @@
               prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
               labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
               required: true,
-            },
+            }
           ],
           scale_width: 600,
         },
@@ -1068,7 +1116,7 @@
     const introLinguisticExp = {
       type: jsPsychHtmlButtonResponse,
       stimulus: `
-        <p>Finally, another method of interpretable ML is <b>linguistic explanation</b>.</p>
+        <p>One method of interpretable ML is <b>linguistic explanation</b>.</p>
       `,
       choices: ['Continue'],
     };
@@ -1172,11 +1220,11 @@
           scale_width: 600,
         },
 
-        // Page 4: Model Interpretability 
+        // Page 4: Model Predictions
         {
           type: jsPsychSurveyLikert,
           show_prev_button: true,
-          preamble: `<p><b>Part 4: Model Interpretability</b></p>`,
+          preamble: `<p><b>Part 4: Model Predictions</b></p>`,
           questions: [
             {
               prompt: "This method of interpretation is effective at contextualizing the model’s predictions",
@@ -1217,7 +1265,17 @@
               prompt: "I would be comfortable with this kind of technology being used to detect deceit in legal proceedings",
               labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
               required: true,
-            },
+            }
+          ],
+          scale_width: 600,
+        },
+
+        // Page 5: Model Applications Continued
+        {
+          type: jsPsychSurveyLikert,
+          show_prev_button: true,
+          preamble: `<p><b>Part 5: Model Applications (Continued) </b></p>`,
+          questions: [
             {
               prompt: "I would be comfortable with this kind of technology being used to detect someone’s mood",
               labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
@@ -1227,7 +1285,7 @@
               prompt: "I would be comfortable with this kind of technology being used to detect someone’s race",
               labels: ["1 <br>Strongly Disagree", "2", "3", "4 <br>Neither Agree Nor Disagree", "5", "6", "7 <br>Strongly Agree"],
               required: true,
-            },
+            }
           ],
           scale_width: 600,
         },
@@ -1241,33 +1299,84 @@
         },
     };
 
-    // Combine both trials into a concurrent timeline
-    const timeline = [
+    // Define blocks to randomize as grouped sub-timelines
+    const featureVisBlock = {
+        timeline: [introFeatureVis, featureVisFlowchart, featureVisualizationSurvey]
+    };
+
+    const pixelSalienceBlock1 = {
+        timeline: [introPixSali, pixelSalienceFlowchart, pixelSalienceSurvey]
+    };
+
+    const pixelSalienceBlock2 = {
+        timeline: [introPixSali2, pixelSalienceFlowchart2, pixelSalienceSurvey2]
+    };
+
+    const modularBlock = {
+        timeline: [introModular, modularFlowchart, modularSurvey]
+    };
+
+    const linguisticExpBlock = {
+        timeline: [introLinguisticExp, linguisticFlowchart, linguisticExpSurvey]
+    };
+
+    // Define an array of these blocks for randomization
+    const randomizedBlocks = jsPsych.randomization.shuffle([
+        featureVisBlock,
+        pixelSalienceBlock1,
+        pixelSalienceBlock2,
+        modularBlock,
+        linguisticExpBlock
+    ]);
+
+    // Fixed part of the timeline
+    const fixedTimeline = [
         hello_trial,
-        survey_trial,
-        position_question,
+        // survey_trial,
+        // position_question,
         familiarity_ml,
         introBox,
         mlBlackBox,
-        facialRecognition,
-        facialRecognitionSurvey,
-        introMethods,
-        featureVisFlowchart,
-        featureVisualizationSurvey,
-        introPixSali,
-        pixelSalienceFlowchart,
-        pixelSalienceSurvey,
-        introPixSali2,
-        pixelSalienceFlowchart2,
-        pixelSalienceSurvey2,
-        introModular,
-        modularFlowchart,
-        modularSurvey,
-        introLinguisticExp,
-        linguisticFlowchart,
-        linguisticExpSurvey,
-        endTrial,
+        // facialRecognition,
+        // facialRecognitionSurvey,
+        introMethods
     ];
+
+    // Combine fixed timeline with randomized blocks and end trial
+    const timeline = [
+        ...fixedTimeline,
+        // ...randomizedBlocks, // Insert randomized blocks here
+        endTrial
+    ];
+
+    // // Combine both trials into a concurrent timeline
+    // const timeline = [
+    //     hello_trial,
+    //     survey_trial,
+    //     position_question,
+    //     familiarity_ml,
+    //     introBox,
+    //     mlBlackBox,
+    //     facialRecognition,
+    //     facialRecognitionSurvey,
+    //     introMethods,
+    //     introFeatureVis,
+    //     featureVisFlowchart,
+    //     featureVisualizationSurvey,
+    //     introPixSali,
+    //     pixelSalienceFlowchart,
+    //     pixelSalienceSurvey,
+    //     introPixSali2,
+    //     pixelSalienceFlowchart2,
+    //     pixelSalienceSurvey2,
+    //     introModular,
+    //     modularFlowchart,
+    //     modularSurvey,
+    //     introLinguisticExp,
+    //     linguisticFlowchart,
+    //     linguisticExpSurvey,
+    //     endTrial,
+    // ];
 
     jsPsych.run(timeline);
   </script>
