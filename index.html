@@ -1324,7 +1324,7 @@
     const randomizedBlocks = jsPsych.randomization.shuffle([
         featureVisBlock,
         pixelSalienceBlock1,
-        pixelSalienceBlock2,
+        // pixelSalienceBlock2,
         modularBlock,
         linguisticExpBlock
     ]);
@@ -1332,20 +1332,20 @@
     // Fixed part of the timeline
     const fixedTimeline = [
         hello_trial,
-        // survey_trial,
-        // position_question,
+        survey_trial,
+        position_question,
         familiarity_ml,
         introBox,
         mlBlackBox,
-        // facialRecognition,
-        // facialRecognitionSurvey,
+        facialRecognition,
+        facialRecognitionSurvey,
         introMethods
     ];
 
     // Combine fixed timeline with randomized blocks and end trial
     const timeline = [
         ...fixedTimeline,
-        // ...randomizedBlocks, // Insert randomized blocks here
+        ...randomizedBlocks, // Insert randomized blocks here
         endTrial
     ];
 

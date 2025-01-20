@@ -1,105 +1,116 @@
 var jsPsychClickableBox = (function (jsPsychModule) {
-    'use strict';
-    const info = {
-        name: 'clickable-box',
-        version: '1.0.0',
-        parameters: {
-          boxID: {
-            type: jsPsychModule.ParameterType.STRING,
-            default: 'clickable-box',
-            description: 'Unique ID for the clickable box.',
-          },
-          initialText: {
-            type: jsPsychModule.ParameterType.STRING,
-            default: 'Clickable Box',
-            description: 'Text displayed inside the box.',
-          },
-          states: {
-            type: jsPsychModule.ParameterType.OBJECT,
-            default: [
-              {
-                background: 'yellow',
-                outline: 'solid',
-                displayText: 'First click message',
-                imageSrc: null, // Default to null if no image is provided
-              },
-              {
-                background: 'white',
-                outline: 'dotted',
-                displayText: 'Second click message',
-                imageSrc: null,
-              },
-            ],
-            description: 'Array of states for the box, defining appearance, text updates, and optional images.',
-          },
-          width: {
-            type: jsPsychModule.ParameterType.STRING,
-            default: '150px',
-            description: 'Width of the box.',
-          },
-          height: {
-            type: jsPsychModule.ParameterType.STRING,
-            default: '100px',
-            description: 'Height of the box.',
-          },
-        },
-        data: {
-          clicks: {
-            type: jsPsychModule.ParameterType.INT,
-            description: 'The number of times the box was clicked during the trial.',
-          },
-          boxID: {
-            type: jsPsychModule.ParameterType.STRING,
-            description: 'The ID of the box that was clicked.',
-          },
-        },
-      };
+  'use strict';
 
-    class ClickableBoxPlugin {
-      static info = info;
+  const info = {
+    name: 'clickable-box-buttons',
+    version: '1.0.1',
+    parameters: {
+      boxID: {
+        type: jsPsychModule.ParameterType.STRING,
+        default: 'clickable-box',
+        description: 'Unique ID for the box.',
+      },
+      initialText: {
+        type: jsPsychModule.ParameterType.STRING,
+        default: 'Clickable Box',
+        description: 'Text displayed inside the box initially.',
+      },
+      states: {
+        type: jsPsychModule.ParameterType.OBJECT,
+        default: [
+          {
+            background: 'yellow',
+            outline: 'solid',
+            displayText: 'Yellow button message',
+            imageSrc: null,
+          },
+          {
+            background: 'blue',
+            outline: 'solid',
+            displayText: 'Blue button message',
+            imageSrc: null,
+          },
+          {
+            background: 'white',
+            outline: 'dotted',
+            displayText: 'White button message',
+            imageSrc: null,
+          },
+        ],
+        description: 'Array of states for the box, defining appearance, text, and optional images.',
+      },
+      width: {
+        type: jsPsychModule.ParameterType.STRING,
+        default: '150px',
+        description: 'Width of the box.',
+      },
+      height: {
+        type: jsPsychModule.ParameterType.STRING,
+        default: '100px',
+        description: 'Height of the box.',
+      },
+    },
+    data: {
+      clicks: {
+        type: jsPsychModule.ParameterType.INT,
+        description: 'The number of button clicks during the trial.',
+      },
+      boxID: {
+        type: jsPsychModule.ParameterType.STRING,
+        description: 'The ID of the box.',
+      },
+    },
+  };
 
-      constructor(jsPsych) {
-        this.jsPsych = jsPsych;
-      }
-      trial(display_element, trial) {
-        // Initialize click count
-        let clicks = 0;
+  class ClickableBoxWithButtonsPlugin {
+    static info = info;
 
-        // Calculate max width (1/4th of the screen width)
-        const maxWidth = `${window.innerWidth / 4}px`;
+    constructor(jsPsych) {
+      this.jsPsych = jsPsych;
+    }
 
-        // Create the full-width line of text and box HTML
-        const boxHTML = `
-          <!-- Full-Width Line of Text -->
-          <div id="${trial.boxID}-line-text" style="
-            max-width: 1500px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-size: 18px;
-            margin-bottom: 20px;">
-            ${trial.lineText || 'This is a default line of text across the screen.'}
-          </div>
-
-          <!-- Clickable Box -->
-          <div id="${trial.boxID}" style="
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            margin: 0 auto;
+    trial(display_element, trial) {
+      // HTML for the box and buttons
+      const boxHTML = `
+        <div id="${trial.boxID}" style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          margin: 20px auto;
+          padding: 10px;
+          background: lightblue;
+          border: 2px solid black;
+          width: ${trial.width};
+          height: ${trial.height};
+        ">
+          ${trial.initialText}
+        </div>
+        <div style="display: flex; justify-content: center; gap: 10px;">
+          <button id="yellow-button" style="
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: yellow;
+            border: 1px solid black;
             cursor: pointer;
-            padding: 10px;
-            word-wrap: break-word;
-            white-space: normal;
-            min-height: 100px;
-            background: lightblue;
-            border: 2px solid black;
-            max-width: ${maxWidth};">
-            ${trial.initialText}
-          </div>
-          <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
+          ">Yellow</button>
+          <button id="blue-button" style="
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: blue;
+            color: white;
+            border: 1px solid black;
+            cursor: pointer;
+          ">Blue</button>
+          <button id="white-button" style="
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: white;
+            border: 1px solid black;
+            cursor: pointer;
+          ">White</button>
+        </div>
+        <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
           <button id="continue-button" style="
             padding: 10px 20px;
             font-size: 16px;
@@ -110,92 +121,74 @@ var jsPsychClickableBox = (function (jsPsychModule) {
             cursor: pointer;
           ">Continue</button>
         </div>
-        `;
-      
-        // Append HTML to display element
-        display_element.innerHTML = boxHTML;
-      
-        // Select the main box element
-        const boxElement = document.getElementById(trial.boxID);
-      
-        // Add event listener for clicks
-        boxElement.addEventListener('click', () => {
-          if (clicks < trial.states.length) {
-            // Get the current state
-            const state = trial.states[clicks];
-      
-            // Update box appearance
-            boxElement.style.background = state.background;
-            boxElement.style.borderStyle = state.outline;
-      
-            // Update the content inside the box
-            if (state.imageSrc) { // If an image is provided
-                    // Create an image element to calculate its aspect ratio
-                    const img = new Image();
-                    img.src = state.imageSrc;
+      `;
 
-                    // Wait for the image to load
-                    img.onload = function () {
-                        // Calculate the aspect ratio (height / width)
-                        const aspectRatio = img.naturalHeight / img.naturalWidth;
+      // Add HTML to display element
+      display_element.innerHTML = boxHTML;
 
-                        // Adjust box to maintain the image's aspect ratio
-                        boxElement.innerHTML = `
-                        <div style="
-                            position: relative;
-                            width: 100%;
-                            max-width: 800px; /* Set a maximum width for responsiveness */
-                            padding-bottom: ${aspectRatio * 100}%; /* Maintain aspect ratio */
-                            background: url('${state.imageSrc}') center center / contain no-repeat;
-                        ">
-                        </div>
-                        `;
+      // Box element
+      const boxElement = document.getElementById(trial.boxID);
 
-                        // Dynamically adjust the box width and height
-                        boxElement.style.width = '100%';
-                        boxElement.style.maxWidth = '800px';
-                        boxElement.style.height = 'auto'; // Height is dictated by aspect ratio
-                    };
-            } else {
-              // Otherwise, display text
-              boxElement.innerHTML = state.displayText;
-            }
-      
-            // Dynamically adjust box size again after content update
-            boxElement.style.height = 'auto';
-            boxElement.style.width = 'auto';
-            boxElement.style.padding = '5px';
-            boxElement.style.whiteSpace = 'normal';
-            boxElement.style.textAlign = 'center';
-      
-            // Retain maxWidth
-            boxElement.style.maxWidth = maxWidth;
-      
-            // Force reflow (optional if needed)
-            boxElement.offsetHeight;
-          }
-          clicks++;
-        });
-
-      // Get the button and attach the event listener
+      // Button elements
+      const yellowButton = document.getElementById('yellow-button');
+      const blueButton = document.getElementById('blue-button');
+      const whiteButton = document.getElementById('white-button');
       const continueButton = document.getElementById('continue-button');
 
-      // Add a fallback check
-      if (continueButton) {
-        continueButton.addEventListener('click', () => {
-          // Collect trial data
-          const trialData = {
-            clicks: clicks,
-            boxID: trial.boxID,
-          };
+      // Initialize click counter
+      let clicks = 0;
 
-          // Finish the trial
-          this.jsPsych.finishTrial(trialData);
-        });
-      } else {
-        console.error('Continue button not found in the DOM!');
-      }
-      }
+      // Function to update the box
+      const updateBox = (state) => {
+        boxElement.style.background = state.background;
+        boxElement.style.borderStyle = state.outline;
+
+        if (state.imageSrc) {
+          // Handle image content
+          const img = new Image();
+          img.src = state.imageSrc;
+          img.onload = function () {
+            const aspectRatio = img.naturalHeight / img.naturalWidth;
+            boxElement.innerHTML = `
+              <div style="
+                position: relative;
+                width: 100%;
+                padding-bottom: ${aspectRatio * 100}%;
+                background: url('${state.imageSrc}') center center / contain no-repeat;
+              "></div>`;
+          };
+        } else {
+          // Handle text content
+          boxElement.innerHTML = state.displayText;
+        }
+      };
+
+      // Add event listeners to buttons
+      yellowButton.addEventListener('click', () => {
+        updateBox(trial.states[0]);
+        clicks++;
+      });
+
+      blueButton.addEventListener('click', () => {
+        updateBox(trial.states[1]);
+        clicks++;
+      });
+
+      whiteButton.addEventListener('click', () => {
+        updateBox(trial.states[2]);
+        clicks++;
+      });
+
+      // Continue button functionality
+      continueButton.addEventListener('click', () => {
+        const trialData = {
+          clicks: clicks,
+          boxID: trial.boxID,
+        };
+        this.jsPsych.finishTrial(trialData);
+      });
     }
-    return ClickableBoxPlugin;
-  })(jsPsychModule);
+  }
+
+  return ClickableBoxWithButtonsPlugin;
+})(jsPsychModule);
