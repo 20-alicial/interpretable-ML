@@ -3,7 +3,7 @@ var jsPsychMLFlowchartModularDev = (function (jsPsychModule) {
 
   const info = {
     name: 'ml-flowchart-modular-dev',
-    version: '1.0.0',
+    version: '1.1.2',
     parameters: {
       topImageSrc: {
         type: jsPsychModule.ParameterType.STRING,
@@ -21,15 +21,25 @@ var jsPsychMLFlowchartModularDev = (function (jsPsychModule) {
           facialStruct: [
             { text: 'Facial Structure', background: 'lightblue' },
             { text: 'State 2: Description of Structure', background: 'yellow' },
-            { text: 'test', background: 'white', outline: '2px dotted black' },
+            { text: 'State 3: Detailed Analysis', background: 'white', outline: '2px dotted black' },
+          ],
+          facialHue: [
+            { text: 'Facial Hue Analysis', background: 'lightblue' },
+            { text: 'State 2: Explanation of Hue', background: 'yellow' },
+            { text: 'State 3: Breakdown of Hue Factors', background: 'white', outline: '2px dotted black' },
           ],
           facialText: [
             { text: 'Facial Text Analysis', background: 'lightblue' },
-            { text: 'State 2: Explanation of Analysis', background: 'yellow' },
-            { text: 'test', background: 'white', outline: '2px dotted black' },
+            { text: 'State 2: Explanation of Text Analysis', background: 'yellow' },
+            { text: 'State 3: Summary of Findings', background: 'white', outline: '2px dotted black' },
+          ],
+          decisionModule: [
+            { text: 'Decision Module', background: 'lightblue' },
+            { text: 'State 2: Explanation of Decision Making', background: 'yellow' },
+            { text: 'State 3: Detailed Explanation', background: 'white', outline: '2px dotted black' },
           ],
         },
-        description: 'States for the clickable boxes with text and background changes.',
+        description: 'States for the interactive modules with text and background changes.',
       },
       trustworthinessScore: {
         type: jsPsychModule.ParameterType.STRING,
@@ -52,222 +62,186 @@ var jsPsychMLFlowchartModularDev = (function (jsPsychModule) {
     }
 
     trial(display_element, trial) {
-      let structClicks = 0;
-      let textClicks = 0;
-
-      // Render the layout
+      // Render the layout with proper styling
       display_element.innerHTML = `
+      
         <!-- Header Text -->
         <div style="text-align: center; font-size: 18px; margin-bottom: 20px;">
           ${trial.flowchartTitle}
         </div>
-        
-        <!-- Flowchart -->
+
+        <!-- Flowchart Layout -->
         <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+
           <!-- Left Image -->
           <div>
             <img src="${trial.topImageSrc}" style="width: 150px; height: auto; border: 1px solid black;">
           </div>
-          
-          <!-- Horizontal Line 0-->
-          <div style="width: 50px; border-top: 2px solid black; margin: 0px 0;"></div>
-          
-          <!-- Leftmost Box -->
-          <div id="facial-struct-box" style="
-            width: 200px;
-            height: 200px;
-            background: ${trial.states.facialStruct[0].background};
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            cursor: pointer;
-            border: 2px solid black;
-            font-size: 14px;
-          ">
-            ${trial.states.facialStruct[0].text}
-          </div>
-          
-          <!-- Horizontal Line 1 -->
-          <div style="width: 50px; border-top: 2px solid black; margin: 0px 0;"></div>
 
-          <!-- Vertically Stack the Extractors -->
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
-            <!-- Extractor Top -->
-            <div id="facial-hue-box" style="
-              width: 300px;
-              height: 150px;
-              background: ${trial.states.facialHue[0].background};
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              text-align: center;
-              cursor: pointer;
-              border: 2px solid black;
-              font-size: 14px;">
-              ${trial.states.facialHue[0].text}
-            </div>
-
-            <!-- Extractor Middle -->
-            <div id="facial-text-box" style="
-              width: 300px;
-              height: 150px;
-              background: ${trial.states.facialText[0].background};
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              text-align: center;
-              cursor: pointer;
-              border: 2px solid black;
-              font-size: 14px;
+          <!-- Facial Structure Box -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+            <div id="facialStruct-box" class="flowchart-box" style="
+              width: 200px; height: 200px; border: 2px solid black;
+              display: flex; align-items: center; justify-content: center;
+              text-align: center; font-size: 14px;
+              background: ${trial.states.facialStruct[0].background};
             ">
-              ${trial.states.facialText[0].text}
+              ${trial.states.facialStruct[0].text}
+            </div>
+            <div class="button-group">
+              <button id="facialStruct-blue-button">Blue</button>
+              <button id="facialStruct-yellow-button">Yellow</button>
+              <button id="facialStruct-white-button">White</button>
             </div>
           </div>
 
-          <!-- Horizontal Line 2 -->
-          <div style="width: 50px; border-top: 2px solid black; margin: 0px 0;"></div>
+          <!-- Facial Hue & Facial Text Boxes (Stacked Vertically) -->
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+              
+              <!-- Facial Hue Analysis Box -->
+              <div id="facialHue-box" class="flowchart-box" style="
+                width: 200px; height: 200px; border: 2px solid black;
+                display: flex; align-items: center; justify-content: center;
+                text-align: center; font-size: 14px;
+                background: ${trial.states.facialHue[0].background};
+              ">
+                ${trial.states.facialHue[0].text}
+              </div>
+              <div class="button-group">
+                <button id="facialHue-blue-button">Blue</button>
+                <button id="facialHue-white-button">White</button>
+              </div>
+
+              <!-- Facial Text Analysis Box -->
+              <div id="facialText-box" class="flowchart-box" style="
+                width: 200px; height: 200px; border: 2px solid black;
+                display: flex; align-items: center; justify-content: center;
+                text-align: center; font-size: 14px;
+                background: ${trial.states.facialText[0].background};
+              ">
+                ${trial.states.facialText[0].text}
+              </div>
+              <div class="button-group">
+                <button id="facialText-blue-button">Blue</button>
+                <button id="facialText-yellow-button">Yellow</button>
+                <button id="facialText-white-button">White</button>
+              </div>
+
+            </div>
           
-          <!-- Right Box -->
-          <div>
-            <div id="decision-module-box" style="
-              width: 300px;
-              height: 200px;
+          <!-- Decision Module Box -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+            <div id="decisionModule-box" class="flowchart-box" style="
+              width: 300px; height: 200px; border: 2px solid black;
+              display: flex; align-items: center; justify-content: center;
+              text-align: center; font-size: 14px;
               background: ${trial.states.decisionModule[0].background};
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              text-align: center;
-              cursor: pointer;
-              border: 2px solid black;
-              font-size: 14px;
             ">
               ${trial.states.decisionModule[0].text}
-          </div>
-
-          <!-- Trustworthy Score-->
-          <div style="margin-top: 10px; font-size: 12px !important; text-align: center; font-weight: bold;">
-              ${trial.trustworthinessScore}
             </div>
-
+            <div class="button-group">
+              <button id="decisionModule-blue-button">Blue</button>
+              <button id="decisionModule-yellow-button">Yellow</button>
+              <button id="decisionModule-white-button">White</button>
+            </div>
           </div>
-        </div>
-        <!-- Mirrored 'L' Elbow Connector -->
-        <div style="position: absolute; top: 420px; left: 1350px; width: 2px; height: 150px; background-color: black;"></div> <!-- Vertical Line -->
-        <div style="position: absolute; top: 570px; left: 1200px; width: 150px; height: 2px; background-color: black;"></div> <!-- Horizontal Line -->
+          
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+            <!-- Explanatory Diagram -->
+            <img src="${trial.bottomImageSrc}" style="width: 500px; height: auto; outline: 1px solid">
 
-        <!-- Bottom Image -->
-        <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-          <img src="${trial.bottomImageSrc}" style="width: 600px; height: auto;">
-        </div>
+            <!-- Output Trustworthiness Score -->
+            <div style="font-weight: light; font-size: 18px; margin-top: 0px; text-align: center; border: dotted 2px; padding: 10px;"
+            <br> Output: Trustworthiness Score
+            </div>
+          </div>
 
-        <!-- Navigation Buttons -->
-          <button id="continue-button" style="
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;"
-            margin: 20px 20px;">
-            Continue
-          </button>
         </div>
+        
+  
+
+        <!-- Continue Button -->
+        <button id="continue-button" class="continue-button">Continue</button>
       `;
 
-      // Add interactivity to the Facial Struct Box
-      const facialStructBox = document.getElementById('facial-struct-box');
-      facialStructBox.addEventListener('click', () => {
-        const states = trial.states.facialStruct; 
-        if (structClicks < states.length - 1) {
-          const currentState = states[structClicks + 1];
+      // Helper function to update boxes
+      const updateBox = (boxElement, state) => {
+        if (!boxElement || !state) return;
 
-          // Apply state changes
-          facialStructBox.innerHTML = currentState.text;
-          facialStructBox.style.background = currentState.background;
+        boxElement.innerHTML = state.text || '';
+        boxElement.style.background = state.background || '';
+        boxElement.style.border = state.border || 'none';
+      };
 
-          // Update outline if defined
-          if (currentState.outline) {
-            facialStructBox.style.border = 'none'; // Remove border to avoid overlap
-            facialStructBox.style.outline = currentState.outline;
-          } else {
-            facialStructBox.style.outline = 'none'; // Reset outline if not defined
-          }
+      // Logging function for tracking button clicks
+      const logClickTime = (clickLog, buttonID) => {
+        const timeElapsed = performance.now();
+        clickLog.push({ button: buttonID, time: timeElapsed });
+        console.log(`Button Clicked: ${buttonID}, Time: ${timeElapsed}`);
+      };
 
-          // Increment click counter after applying changes
-          structClicks++;
-        }
+      // Initialize click logs for each box
+      const structClickTimes = [];
+      const hueClickTimes = [];
+      const textClickTimes = [];
+      const decisionClickTimes = [];
+
+      // **Event Listeners for Facial Structure Box Buttons**
+      document.getElementById('facialStruct-blue-button').addEventListener('click', () => {
+        logClickTime(structClickTimes, 'facialStruct-blue');
+        updateBox(document.getElementById('facialStruct-box'), trial.states.facialStruct[0]);
+      });
+      document.getElementById('facialStruct-yellow-button').addEventListener('click', () => {
+        logClickTime(structClickTimes, 'facialStruct-yellow');
+        updateBox(document.getElementById('facialStruct-box'), trial.states.facialStruct[1]);
+      });
+      document.getElementById('facialStruct-white-button').addEventListener('click', () => {
+        logClickTime(structClickTimes, 'facialStruct-white');
+        updateBox(document.getElementById('facialStruct-box'), trial.states.facialStruct[2]);
       });
 
-      // Add interactivity to the Facial Text Box
-      const facialTextBox = document.getElementById('facial-text-box');
-      // let textClicks = 0;
-      facialTextBox.addEventListener('click', () => {
-        const states = trial.states.facialText;
-        if (textClicks < states.length - 1) {
-          const currentState = states[textClicks + 1];
-          facialTextBox.innerHTML = currentState.text;
-          facialTextBox.style.background = currentState.background;
-
-          // Update outline if defined
-          if (currentState.outline) {
-            facialTextBox.style.border = 'none';
-            facialTextBox.style.outline = currentState.outline;
-          }
-          textClicks++;
-        }
+      // **Event Listeners for Facial Hue Analysis Box Buttons**
+      document.getElementById('facialHue-blue-button').addEventListener('click', () => {
+        logClickTime(hueClickTimes, 'facialHue-blue');
+        updateBox(document.getElementById('facialHue-box'), trial.states.facialHue[0]);
+      });
+      document.getElementById('facialHue-white-button').addEventListener('click', () => {
+        logClickTime(hueClickTimes, 'facialHue-white');
+        updateBox(document.getElementById('facialHue-box'), trial.states.facialHue[1]);
       });
 
-      // Add interactivity for FacialHue
-      const facialHueBox = document.getElementById('facial-hue-box');
-      let hueClicks = 0;
-      facialHueBox.addEventListener('click', () => {
-        const states = trial.states.facialHue;
-        if (hueClicks < states.length - 1) {
-          const currentState = states[hueClicks + 1];
-          facialHueBox.innerHTML = currentState.text;
-          facialHueBox.style.background = currentState.background;
-
-          if (currentState.outline) {
-            facialHueBox.style.border = 'none';
-            facialHueBox.style.outline = currentState.outline;
-          } else {
-            facialHueBox.style.outline = 'none';
-          }
-          hueClicks++;
-        }
+      // **Event Listeners for Facial Text Analysis Box Buttons**
+      document.getElementById('facialText-blue-button').addEventListener('click', () => {
+        logClickTime(textClickTimes, 'facialText-blue');
+        updateBox(document.getElementById('facialText-box'), trial.states.facialText[0]);
+      });
+      document.getElementById('facialText-yellow-button').addEventListener('click', () => {
+        logClickTime(textClickTimes, 'facialText-yellow');
+        updateBox(document.getElementById('facialText-box'), trial.states.facialText[1]);
+      });
+      document.getElementById('facialText-white-button').addEventListener('click', () => {
+        logClickTime(textClickTimes, 'facialText-white');
+        updateBox(document.getElementById('facialText-box'), trial.states.facialText[2]);
       });
 
-      // Add interactivity to decisionModuleBox
-      const decisionModuleBox = document.getElementById('decision-module-box');
-      let decisionClicks = 0;
-      decisionModuleBox.addEventListener('click', () => {
-        const states = trial.states.decisionModule;
-        if (decisionClicks < states.length - 1) {
-          const currentState = states[decisionClicks + 1];
-          decisionModuleBox.innerHTML = currentState.text;
-          decisionModuleBox.style.background = currentState.background;
-
-          if (currentState.outline) {
-            decisionModuleBox.style.border = 'none';
-            decisionModuleBox.style.outline = currentState.outline;
-          } else {
-            decisionModuleBox.style.outline = 'none';
-          }
-          decisionClicks++;
-        }
+      // **Event Listeners for Decision Module Box Buttons**
+      document.getElementById('decisionModule-blue-button').addEventListener('click', () => {
+        logClickTime(decisionClickTimes, 'decisionModule-blue');
+        updateBox(document.getElementById('decisionModule-box'), trial.states.decisionModule[0]);
+      });
+      document.getElementById('decisionModule-yellow-button').addEventListener('click', () => {
+        logClickTime(decisionClickTimes, 'decisionModule-yellow');
+        updateBox(document.getElementById('decisionModule-box'), trial.states.decisionModule[1]);
+      });
+      document.getElementById('decisionModule-white-button').addEventListener('click', () => {
+        logClickTime(decisionClickTimes, 'decisionModule-white');
+        updateBox(document.getElementById('decisionModule-box'), trial.states.decisionModule[2]);
       });
 
 
-      // Add functionality to Back and Continue buttons
-      const continueButton = document.getElementById('continue-button');
-      continueButton.addEventListener('click', () => {
-        const trialData = {
-          structBoxClicks: structClicks,
-          textBoxClicks: textClicks,
-        };
-        this.jsPsych.finishTrial(trialData);
+      // Continue button functionality
+      document.getElementById('continue-button').addEventListener('click', () => {
+        this.jsPsych.finishTrial();
       });
     }
   }

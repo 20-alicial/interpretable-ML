@@ -20,7 +20,7 @@ var jsPsychDualClickableBox = (function (jsPsychModule) {
           states: [
             { text: 'Top Box State 1', background: 'lightblue' },
             { text: 'Top Box State 2', background: 'yellow' },
-            { text: 'Top Box State 3', background: 'white', border: 'dotted' },
+            { text: 'Top Box State 3', background: 'orange', border: none },
           ],
         },
         description: 'Parameters for the top box, including states.',
@@ -34,7 +34,8 @@ var jsPsychDualClickableBox = (function (jsPsychModule) {
           height: '100px',
           states: [
             { text: 'Bottom Box State 1', background: 'lightblue' },
-            { text: 'Bottom Box State 3', background: 'white', border: 'dotted' },
+            { text: 'Bottom Box State 2', background: 'green' },
+            { text: 'Bottom Box State 3', background: 'red', outline: '2px dotted black' },
           ],
         },
         description: 'Parameters for the bottom box, including states.',
@@ -97,47 +98,31 @@ var jsPsychDualClickableBox = (function (jsPsychModule) {
         </div>
         <div style="display: flex; justify-content: center; align-items: center;">
           <div style="display: flex; flex-direction: column; gap: 20px; margin-right: 20px;">
-            <!-- Top Box with Buttons on the Left (Blue, Yellow, White) -->
-            <div style="display: flex; align-items: center; gap: 10px; flex-direction: row-reverse;">
-              <div id="top-box" style="
-                width: ${trial.leftBox.width};
-                height: ${trial.leftBox.height};
-                background: ${trial.leftBox.background};
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                cursor: pointer;
-                border: 2px solid black;
-              ">
-                ${trial.leftBox.text}
-              </div>
-              <div style="display: flex; flex-direction: column; gap: 5px;">
-                <button id="top-blue-button" style="background-color: blue; color: white; padding: 5px; cursor: pointer;">Blue</button>
-                <button id="top-yellow-button" style="background-color: yellow; padding: 5px; cursor: pointer;">Yellow</button>
-                <button id="top-white-button" style="background-color: white; padding: 5px; cursor: pointer;">White</button>
-              </div>
+            <div id="top-box" style="
+              width: ${trial.leftBox.width};
+              height: ${trial.leftBox.height};
+              background: ${trial.leftBox.background};
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              text-align: center;
+              cursor: pointer;
+              border: 2px solid black;
+            ">
+              ${trial.leftBox.text}
             </div>
-      
-            <!-- Bottom Box with Buttons on the Left (Blue, White) -->
-            <div style="display: flex; align-items: center; gap: 10px; flex-direction: row-reverse;">
-              <div id="bottom-box" style="
-                width: ${trial.rightBox.width};
-                height: ${trial.rightBox.height};
-                background: ${trial.rightBox.background};
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                cursor: pointer;
-                border: 2px solid black;
-              ">
-                ${trial.rightBox.text}
-              </div>
-              <div style="display: flex; flex-direction: column; gap: 5px;">
-                <button id="bottom-blue-button" style="background-color: blue; color: white; padding: 5px; cursor: pointer;">Blue</button>
-                <button id="bottom-white-button" style="background-color: white; padding: 5px; cursor: pointer;">White</button>
-              </div>
+            <div id="bottom-box" style="
+              width: ${trial.rightBox.width};
+              height: ${trial.rightBox.height};
+              background: ${trial.rightBox.background};
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              text-align: center;
+              cursor: pointer;
+              border: 2px solid black;
+            ">
+              ${trial.rightBox.text}
             </div>
           </div>
           <div>
@@ -157,62 +142,39 @@ var jsPsychDualClickableBox = (function (jsPsychModule) {
         </div>
       `;
 
-      // Get references to the box elements
-      const leftBoxElement = document.getElementById('top-box'); // Top box (Inputs)
-      const bottomBoxElement = document.getElementById('bottom-box'); // Bottom box (Outputs)
-
-      // Define update box function
-      const updateBox = (boxElement, state) => {
-        if (state) {
-          boxElement.innerHTML = state.text || '';
-          
-          // Handle state background
-          boxElement.style.background = state.background || '';
-          if (state.outline) {
-            boxElement.style.outline = state.outline;
+      // Top Box Event Listener
+      const topBoxElement = document.getElementById('top-box');
+      topBoxElement.addEventListener('click', () => {
+        const states = trial.leftBox.states;
+        if (states && leftClicks < states.length) {
+          const currentState = states[leftClicks];
+          topBoxElement.innerHTML = currentState.text;
+          topBoxElement.style.background = currentState.background;
+          if (currentState.outline) {
+            topBoxElement.style.outline = currentState.outline;
           } else {
-            boxElement.style.outline = 'none';
+            topBoxElement.style.outline = 'none';
           }
-
-          // Handle state border property explicitly
-          if (state.border) {
-            boxElement.style.border = state.border; // Use the border defined in the state
-          } else if (state.border === 'None' || state.border === 'solid') {
-            boxElement.style.border = 'none'; // Remove the border
-          }
-        } else {
-          console.error('State is undefined.');
+          leftClicks++;
         }
-      };
-    
-      // Top Box Buttons
-      document.getElementById('top-blue-button').addEventListener('click', () => {
-        const state = trial.leftBox.states[0]; // Blue state
-        updateBox(leftBoxElement, state); // Pass the top box element
       });
-      
-      document.getElementById('top-yellow-button').addEventListener('click', () => {
-        const state = trial.leftBox.states[1]; // Yellow state
-        updateBox(leftBoxElement, state); // Pass the top box element
-      });
-      
-      document.getElementById('top-white-button').addEventListener('click', () => {
-        const state = trial.leftBox.states[2]; // White state
-        updateBox(leftBoxElement, state); // Pass the top box element
-      });
-      
 
-      // Bottom Box Buttons
-      document.getElementById('bottom-blue-button').addEventListener('click', () => {
-        const state = trial.rightBox.states[0]; // Blue state
-        updateBox(bottomBoxElement, state); // Pass the bottom box element
+      // Bottom Box Event Listener
+      const bottomBoxElement = document.getElementById('bottom-box');
+      bottomBoxElement.addEventListener('click', () => {
+        const states = trial.rightBox.states;
+        if (states && rightClicks < states.length) {
+          const currentState = states[rightClicks];
+          bottomBoxElement.innerHTML = currentState.text;
+          bottomBoxElement.style.background = currentState.background;
+          if (currentState.outline) {
+            bottomBoxElement.style.outline = currentState.outline;
+          } else {
+            bottomBoxElement.style.outline = 'none';
+          }
+          rightClicks++;
+        }
       });
-      
-      document.getElementById('bottom-white-button').addEventListener('click', () => {
-        const state = trial.rightBox.states[1]; // White state
-        updateBox(bottomBoxElement, state); // Pass the bottom box element
-      });
-      
 
       // Get the button and attach the event listener
       const continueButton = document.getElementById('continue-button');
