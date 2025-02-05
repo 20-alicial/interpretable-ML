@@ -2,7 +2,33 @@
 <html>
   <head>
     <style>
-    
+      .arrow {
+        border: solid black;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 3px;
+      }
+
+      .right {
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+      }
+
+      .left {
+        transform: rotate(135deg);
+        -webkit-transform: rotate(135deg);
+      }
+
+      .up {
+        transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+      }
+
+      .down {
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+      }
+
     </style>
 
     <title>My experiment</title>
@@ -79,7 +105,7 @@
       states: [
         { background: 'lightblue', outline: 'solid', displayText: 'Throughout this study, there will be optional opportunities to interact with various elements and reveal extra information. Interactive elements will appear in blue boxes. Clicking the buttons below will toggle the amount of information shown. Try it out by clicking "Yellow"!'},
         { background: 'yellow', outline: 'solid', displayText: 'Yellow is the second level of information. Now click on "White" for even more information!' },
-        { background: 'white', outline: 'dotted', displayText: 'Great! Now you have revealed all the information for this box. You can switch between the views at any time by clicking the button below.' }
+        { background: 'white', outline: 'dotted', displayText: 'Great! Now you have revealed all the information for this box. You can switch between the views at any time by clicking the button below. For each page, please toggle the amount of information to what you find the most helpful before clicking "continue" ' }
       ],
     }
 
@@ -87,7 +113,7 @@
     const mlBlackBox = {
         type: jsPsychClickableBoxWithButtonsTwo,
         boxID: 'ML_FER_example_box',
-        descriptionText: 'Many modern machine learning (ML) technologies are “black boxes”.',
+        descriptionText: 'Many modern machine learning (ML) technologies are “black boxes”. Before clicking "Continue", please toggle the amount of information to what you find the most helpful. <br><br> This means for this trial, if you find the diagram more helpful, click the "white" button so that the diagram is displayed before clicking "Continue". <br><br> If you find the blue description more helpful, then click the "blue" button so that the description is displayed before clicking "Continue" <br><br> Feel free to toggle between displays any number of times as long as you make sure the final display is the one you find the most helpful.',
         states: [
             { background: 'lightblue', outline: 'solid', displayText: 'A ML black box is a system which we understand in terms of its inputs and outputs, leaving the internal transformation from input to output obscure. Toggle the white button below to see a schematic diagram describing black box ML.'},
             { background: 'white', outline: 'None', imageSrc: './images/black_box.png' }
@@ -99,7 +125,7 @@
     const facialRecognition = {
       type: jsPsychDualClickableBox,
       lineText:
-        'One common ML application is facial expression recognition. Facial expression recognition uses ML to identify the emotions or attributes characterizing a human face. <br>For example, it can be used to detect age, whether someone is happy or sad, and even whether someone is suspicious through cues such as stress or nervousness. <br> Some examples of inputs and outputs using ML to evaluate the age, gender, happiness, and trustworthiness of a face are presented below.',
+        'One common ML application is facial expression recognition. Facial expression recognition uses ML to identify the emotions or attributes characterizing a human face. <br>For example, it can be used to detect age, whether someone is happy or sad, and even whether someone is suspicious through cues such as stress or nervousness. <br> Some examples of inputs and outputs using ML to evaluate the age, gender, happiness, and trustworthiness of a face are presented below. Before clicking "Continue", please toggle the amount of information to what you find the most helpful.',
       leftBox: {
         text: 'Inputs',
         background: 'lightblue',
@@ -309,7 +335,7 @@
       flowchartTitle: `
         <b>Feature Visualization</b> involves asking which parts of an input were most important for determining the ML model’s output about that input.<br> 
         By examining how important a given pixel in the input was for the trained model to produce its output and repeating this procedure for every pixel in the input, <br>
-        a map is produced describing which parts of the input were important for producing the output.<br>
+        a map is produced describing which parts of the input were important for producing the output.<br> <br> Before clicking "Continue", please toggle the amount of information to what you find the most helpful.
       `,
       topImageSrc: './images/face.png',
       bottomImageSrc: './images/feature_visualization2.png',
@@ -317,12 +343,12 @@
         trainedMLModel: [
           { text: 'Trained ML Model', background: 'lightblue', border: 'solid' },
           { text: 'This ML model achieved a test MSE of 54.07', background: 'yellow', border: 'solid' },
-          { text: 'We used transfer learning to train a classification MLP appended to a ResNet50 base', background: 'white', border: 'dotted'},
+          { text: 'We used transfer learning to train a classification MLP appended to a frozen ResNet50 base for 100 epochs', background: 'white', border: 'dotted'},
         ],
         pixelSalience: [
           { text: 'Feature Visualization Algorithm', background: 'lightblue', border: 'solid' },
-          { text: "This algorithm creates & visualizes the type of input that would cause a specific component or 'functional unit' of the trained model, such as a neuron or filter, to activate most strongly.", background: 'yellow', border: 'solid' },
-          { text: "We implemented Activation Maximization with bilateral blurring, where each filter's activation serves as the objective for an optimization process. This process begins with random noise inputs and refines them over 150 iterations.", background: 'white', border: 'dotted' }
+          { text: "This algorithm derives inputs for which a given functional unit in the trained model would activate maximally.", background: 'yellow', border: 'solid' },
+          { text: "We implemented Activation Maximization with bilateral blurring. These methods take each filter’s activation as the objective for an optimization procedure which begins with random noise inputs and is then refined over many iterations - in this case 150.", background: 'white', border: 'dotted' }
         ],
       },
       trustworthinessScore: `<div style="font-weight: light; font-size: 18px; margin-top: 0px; text-align: center; border: dotted 2px; padding: 10px">Output: <br> Trustworthiness Score</div>`,
@@ -469,7 +495,7 @@
       flowchartTitle: `
         <b>Pixel salience</b> involves asking which parts of an input were most important for determining the ML model’s output about that input.<br> 
         By examining how important a given pixel in the input was for the trained model to produce its output and repeating this procedure for every pixel in the input, <br>
-        a map is produced describing which parts of the input were important for producing the output.<br>
+        a map is produced describing which parts of the input were important for producing the output.<br> <br> Before clicking "Continue", please toggle the amount of information to what you find the most helpful.
       `,
       topImageSrc: './images/face.png',
       bottomImageSrc: './images/pixel_salience.png',
@@ -663,7 +689,7 @@
       flowchartTitle: `
         <b>Pixel salience</b> involves asking which parts of an input were most important for determining the ML model’s output about that input.<br> 
         By examining how important a given pixel in the input was for the trained model to produce its output and repeating this procedure for every pixel in the input, <br>
-        a map is produced describing which parts of the input were important for producing the output.<br>
+        a map is produced describing which parts of the input were important for producing the output.<br><br> Before clicking "Continue", please toggle the amount of information to what you find the most helpful.
       `,
       topImageSrc: './images/face.png',
       bottomImageSrc: './images/pixel_salience2.png',
@@ -854,7 +880,8 @@
     const linguisticFlowchart = {
       type: jsPsychMLFlowchartButtons,
       flowchartTitle: `
-        <b>Linguistic explanation</b> Linguistic explanation involves using a separate neural network to investigate how the first one made its decision. The second network is developed such that it produces outputs in the form of language. <br>
+        <b>Linguistic explanation</b> involves using a separate neural network to investigate how the first one made its decision. 
+        <br> The second network is developed such that it produces outputs in the form of language that explains how the model computed the output.<br> <br> Before clicking "Continue", please toggle the amount of information to what you find the most helpful.
       `,
       topImageSrc: './images/face.png',
       bottomImageSrc: './images/linguistic_explanation.png',
@@ -872,6 +899,39 @@
       },
       trustworthinessScore: `<div style="font-weight: light; font-size: 18px; margin-top: 0px; text-align: center; border: dotted 2px; padding: 10px">Output: <br> Trustworthiness Score</div>`,
     };
+
+    // Flowchart for modular development
+    const modularFlowchart = {
+      type: jsPsychMLFlowchartModularDev,
+      flowchartTitle: `
+        <br><b>Modular development</b> involves restricting the scope of black box ML to the problem’s objective properties and <br> using different, transparent methods to combine those objective properties into subjective evaluations.<br>
+        <br> Before clicking "Continue", please toggle the amount of information to what you find the most helpful.
+      `,
+      topImageSrc: './images/face.png',
+      bottomImageSrc: './images/modular_dev.png',
+      states: {
+        facialStruct: [
+          { text: 'Module 1: Facial Structure Extractor', background: 'lightblue', border: 'solid 2px' },
+          { text: 'We used a pretrained keypoint detector from the Dlib package to measure & isolate facial features in pixel space for texture and hue extraction', background: 'yellow', border: 'solid 2px' },
+          { text: 'Our downstream texture and hue extractors rely on the output from this module, guaranteeing they are applied to the face rather than other parts of the image (e.g. the background)', background: 'white', border: '2px dotted'},
+        ],
+        facialText: [
+          { text: 'Module 3: Facial Texture Extractor', background: 'lightblue', border: 'solid 2px' },
+          { text: 'We used a Haralick feature calculator from the Mahotas package to measure texture properties of the face', background: 'yellow', border: 'solid 2px'},
+          { text: 'The 13 Haralick features are given by these 13 operations on the adjacency matrix describing trends in the luminance of neighboring pixels over some input', background: 'white', border: '2px dotted black' }
+        ],
+        facialHue: [
+          { text: 'Module 2: Facial Hue <br> Extractor', background: 'lightblue', border: 'solid 2px' },
+          { text: 'We used a color histogram extraction tool from the openCV package to measure facial hue', background: 'white', border: '2px dotted black' },
+        ],
+        decisionModule: [
+          { text: 'Decision Module', background: 'lightblue', border: '2px solid' },
+          { text: "The final decisions are produced by a transparent LASSO regression decision module, revealing how inputs are used. It achieved a test MSE of 42.18, with regularization set via grid search.", background: 'yellow', border: '2px solid' },
+          { text: 'Our visualization below highlights the color, structure, and texture coefficients retained after regularization, with empty spaces (color, texture) and "x" marks (structure) indicating features with less predictive value for human ratings.', background: 'white', border: '2px dotted black' },
+        ],
+      },
+      trustworthinessScore: '',
+    }
 
     // Continue button trial
     const continueButton = {
@@ -920,38 +980,6 @@
       `,
       choices: ['Continue'],
     };
-
-    // Flowchart for modular development
-    const modularFlowchart = {
-      type: jsPsychMLFlowchartModularDev,
-      flowchartTitle: `
-        <br><b>Modular development</b> involves restricting the scope of black box ML to the problem’s objective properties and <br> using different, transparent methods to combine those objective properties into subjective evaluations.<br>
-      `,
-      topImageSrc: './images/face.png',
-      bottomImageSrc: './images/modular_dev.png',
-      states: {
-        facialStruct: [
-          { text: 'Module 1: Facial Structure Extractor', background: 'lightblue', border: 'solid 2px' },
-          { text: 'We used a pretrained keypoint detector from the Dlib package to measure & isolate facial features in pixel space for texture and hue extraction', background: 'yellow', border: 'solid 2px' },
-          { text: 'Our downstream texture and hue extractors rely on the output from this module, guaranteeing they are applied to the face rather than other parts of the image (e.g. the background)', background: 'white', border: '2px dotted'},
-        ],
-        facialText: [
-          { text: 'Module 3: Facial Texture Extractor', background: 'lightblue', border: 'solid 2px' },
-          { text: 'We used a Haralick feature calculator from the Mahotas package to measure texture properties of the face', background: 'yellow', border: 'solid 2px'},
-          { text: 'The 13 Haralick features are given by these 13 operations on the adjacency matrix describing trends in the luminance of neighboring pixels over some input', background: 'white', border: '2px dotted black' }
-        ],
-        facialHue: [
-          { text: 'Module 2: Facial Hue <br> Extractor', background: 'lightblue', border: 'solid 2px' },
-          { text: 'We used a color histogram extraction tool from the openCV package to measure facial hue', background: 'white', border: '2px dotted black' },
-        ],
-        decisionModule: [
-          { text: 'Decision Module', background: 'lightblue', border: '2px solid' },
-          { text: "The final decisions are produced by a transparent LASSO regression decision module, revealing how inputs are used. It achieved a test MSE of 42.18, with regularization set via grid search.", background: 'yellow', border: '2px solid' },
-          { text: 'Our visualization below highlights the color, structure, and texture coefficients retained after regularization, with empty spaces (color, texture) and "x" marks (structure) indicating features with less predictive value for human ratings.', background: 'white', border: '2px dotted black' },
-        ],
-      },
-      trustworthinessScore: '',
-    }
 
     const modularSurvey = [
         // Page 1: Understanding the Model

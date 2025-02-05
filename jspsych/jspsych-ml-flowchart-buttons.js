@@ -68,16 +68,18 @@ var jsPsychMLFlowchartButtons = (function (jsPsychModule) {
 
       // Render the layout with buttons added
       display_element.innerHTML = `
-        <div style="text-align: center; font-size: 12px; margin-bottom: 20px;">
+        <div style="text-align: center; font-size: 18px; margin-bottom: 20px;">
           ${trial.flowchartTitle}
         </div>
 
         <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
 
-          <!-- Left Image -->
+          <!-- Face Image -->
           <div>
             <img src="${trial.topImageSrc}" style="width: 150px; height: auto; border: 1px solid black;">
           </div>
+
+          <p><i class="arrow right"></i></p>
 
           <!-- ML Model Box with Buttons -->
           <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
@@ -100,10 +102,14 @@ var jsPsychMLFlowchartButtons = (function (jsPsychModule) {
             </div>
           </div>
 
+          <p><i class="arrow right"></i></p>
+
           <!-- Output Trustworthiness Score -->
           <div style="margin-top: 10px; font-size: 12px !important; text-align: center; font-weight: regular;">
             ${trial.trustworthinessScore}
           </div>
+
+          <p><i class="arrow right"></i></p>
 
           <!-- Pixel Salience Box with Buttons -->
           <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
@@ -126,12 +132,15 @@ var jsPsychMLFlowchartButtons = (function (jsPsychModule) {
             </div>
           </div>
 
+          <p><i class="arrow right"></i></p>
+          <!-- Bottom Image -->
+          <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+            <img src="${trial.bottomImageSrc}" style="width: 300px; height: auto; border: 1px solid black;">
+          </div>
+          
+
         </div>
 
-        <!-- Bottom Image -->
-        <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-          <img src="${trial.bottomImageSrc}" style="width: 300px; height: auto; border: 1px solid black;">
-        </div>
 
         <!-- Continue Button -->
         <button id="continue-button" style="

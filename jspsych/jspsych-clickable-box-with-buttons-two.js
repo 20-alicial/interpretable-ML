@@ -67,48 +67,76 @@ var jsPsychClickableBoxWithButtonsTwo = (function (jsPsychModule) {
       console.log('States (Two Buttons):', trial.states);
       // HTML for the box and buttons
       const boxHTML = `
-       <div style="text-align: center; margin-bottom: 10px; font-size: 18px;">${trial.descriptionText || ''}</div>
-        <div id="${trial.boxID}" style="
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          margin: 20px auto;
-          padding: 10px;
-          background: lightblue;
-          border: 2px solid black;
-          width: ${trial.width};
-          height: ${trial.height};
-        ">
-          ${trial.states[0].displayText || ''}
+        <!-- Title Section -->
+        <div style="text-align: center; font-size: 18px; margin-bottom: 20px;">
+          ${trial.flowchartTitle}
         </div>
-        <div style="display: flex; justify-content: center; gap: 10px;">
-          <button id="blue-button" style="
-              padding: 10px 20px;
-              font-size: 16px;
-              background-color: blue;
-              color: white;
-              border: 1px solid black;
-              cursor: pointer;
-            ">Blue</button>
-          <button id="white-button" style="
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: white;
-            border: 1px solid black;
-            cursor: pointer;
-          ">White</button>
-        </div>
-        <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
-          <button id="continue-button" style="
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-          ">Continue</button>
+
+        <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+          
+          <!-- Top Image (Face Image) -->
+          <div>
+            <img src="${trial.topImageSrc}" style="width: 150px; height: auto; border: 1px solid black;">
+          </div>
+
+          <p><i class="arrow right"></i></p>
+
+          <!-- Clickable Box with Buttons -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+            <div id="${trial.boxID}" style="
+              width: 200px;
+              height: 200px;
+              background: ${trial.states[0].background};
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              text-align: center;
+              border: 2px solid black;
+            ">
+              ${trial.states[0].displayText}
+            </div>
+            <div style="display: flex; gap: 5px;">
+              <button id="blue-button" style="background-color: blue; color: white; padding: 5px; cursor: pointer;">Blue</button>
+              <button id="white-button" style="background-color: white; padding: 5px; cursor: pointer;">White</button>
+            </div>
+          </div>
+
+          <p><i class="arrow right"></i></p>
+
+          <!-- Trustworthiness Score -->
+          <div style="margin-top: 10px; font-size: 12px !important; text-align: center; font-weight: regular;">
+            ${trial.trustworthinessScore}
+          </div>
+
+          <p><i class="arrow right"></i></p>
+
+          <!-- Pixel Salience Box with Buttons -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+            <div id="pixel-salience-box" style="
+              width: 300px;
+              height: 300px;
+              background: ${trial.states[1].background};
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              text-align: center;
+              border: 2px solid black;
+            ">
+              ${trial.states[1].displayText}
+            </div>
+            <div style="display: flex; gap: 5px;">
+              <button id="salience-blue-button" style="background-color: blue; color: white; padding: 5px; cursor: pointer;">Blue</button>
+              <button id="salience-white-button" style="background-color: white; padding: 5px; cursor: pointer;">White</button>
+            </div>
+          </div>
+
+          <p><i class="arrow right"></i></p>
+
+          <!-- Bottom Image (Pixel Salience Heatmap) -->
+          <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+            <img src="${trial.bottomImageSrc}" style="width: 300px; height: auto; border: 1px solid black;">
+          </div>
+
         </div>
       `;
 

@@ -73,10 +73,12 @@ var jsPsychMLFlowchartModularDev = (function (jsPsychModule) {
         <!-- Flowchart Layout -->
         <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
 
-          <!-- Left Image -->
+          <!-- Face Image -->
           <div>
             <img src="${trial.topImageSrc}" style="width: 150px; height: auto; border: 1px solid black;">
           </div>
+          
+          <p><i class="arrow right"></i></p>
 
           <!-- Facial Structure Box -->
           <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
@@ -89,11 +91,14 @@ var jsPsychMLFlowchartModularDev = (function (jsPsychModule) {
               ${trial.states.facialStruct[0].text}
             </div>
             <div class="button-group">
-              <button id="facialStruct-blue-button">Blue</button>
-              <button id="facialStruct-yellow-button">Yellow</button>
-              <button id="facialStruct-white-button">White</button>
+              <button id="facialStruct-blue-button" style="background-color: blue; color: white; padding: 5px; cursor: pointer;">Blue</button>
+              <button id="facialStruct-yellow-button" style="background-color: yellow; color black; padding: 5px; cursor: pointer;">Yellow</button>
+              <button id="facialStruct-white-button" style="background-color: white; color: black; padding: 5px; cursor: pointer;">White</button>
             </div>
           </div>
+          
+          <p><i class="arrow right"></i></p>
+          
 
           <!-- Facial Hue & Facial Text Boxes (Stacked Vertically) -->
             <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
@@ -108,8 +113,8 @@ var jsPsychMLFlowchartModularDev = (function (jsPsychModule) {
                 ${trial.states.facialHue[0].text}
               </div>
               <div class="button-group">
-                <button id="facialHue-blue-button">Blue</button>
-                <button id="facialHue-white-button">White</button>
+                <button id="facialHue-blue-button" style="background-color: blue; color: white; padding: 5px; cursor: pointer;">Blue</button>
+                <button id="facialHue-white-button" style="background-color: white; color: black; padding: 5px; cursor: pointer;">White</button>
               </div>
 
               <!-- Facial Text Analysis Box -->
@@ -122,12 +127,12 @@ var jsPsychMLFlowchartModularDev = (function (jsPsychModule) {
                 ${trial.states.facialText[0].text}
               </div>
               <div class="button-group">
-                <button id="facialText-blue-button">Blue</button>
-                <button id="facialText-yellow-button">Yellow</button>
-                <button id="facialText-white-button">White</button>
+                <button id="facialText-blue-button" style="background-color: blue; color: white; padding: 5px; cursor: pointer;">Blue</button>
+                <button id="facialText-yellow-button" style="background-color: yellow; color black; padding: 5px; cursor: pointer;">Yellow</button>
+                <button id="facialText-white-button" style="background-color: white; color: black; padding: 5px; cursor: pointer;">White</button>
               </div>
-
             </div>
+            <p><i class="arrow right"></i></p>
           
           <!-- Decision Module Box -->
           <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
@@ -140,16 +145,19 @@ var jsPsychMLFlowchartModularDev = (function (jsPsychModule) {
               ${trial.states.decisionModule[0].text}
             </div>
             <div class="button-group">
-              <button id="decisionModule-blue-button">Blue</button>
-              <button id="decisionModule-yellow-button">Yellow</button>
-              <button id="decisionModule-white-button">White</button>
+              <button id="decisionModule-blue-button" style="background-color: blue; color: white; padding: 5px; cursor: pointer;">Blue</button>
+              <button id="decisionModule-yellow-button" style="background-color: yellow; color black; padding: 5px; cursor: pointer;">Yellow</button>
+              <button id="decisionModule-white-button" style="background-color: white; color: black; padding: 5px; cursor: pointer;">White</button>
             </div>
           </div>
+          <p><i class="arrow right"></i></p>
           
           <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
             <!-- Explanatory Diagram -->
             <img src="${trial.bottomImageSrc}" style="width: 500px; height: auto; outline: 1px solid">
-
+            
+            <p> <i class="arrow down"></i></p>
+            
             <!-- Output Trustworthiness Score -->
             <div style="font-weight: light; font-size: 18px; margin-top: 0px; text-align: center; border: dotted 2px; padding: 10px;"
             <br> Output: Trustworthiness Score
@@ -161,7 +169,15 @@ var jsPsychMLFlowchartModularDev = (function (jsPsychModule) {
   
 
         <!-- Continue Button -->
-        <button id="continue-button" class="continue-button">Continue</button>
+        <button id="continue-button" class="continue-button" style="
+              padding: 10px 20px;
+              font-size: 16px;
+              background-color: #4CAF50;
+              color: white;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;"
+              margin: 20px 20px;">Continue</button>
       `;
 
       // Helper function to update boxes

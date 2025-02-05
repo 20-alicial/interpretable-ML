@@ -58,12 +58,12 @@ var jsPsychMLFlowchart = (function (jsPsychModule) {
         // Render the layout
         display_element.innerHTML = `
           <!-- Header Text -->
-          <div style="text-align: center; font-size: 18px; margin-bottom: 20px;">
+          <div style="text-align: center; font-size: inherit; margin-bottom: 20px;">
             ${trial.flowchartTitle}
           </div>
           
           <!-- Flowchart -->
-          <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+          <div style="display: flex; justify-content: center; align-items: center; gap: 20px; ">
             <!-- Left Image -->
             <div>
               <img src="${trial.topImageSrc}" style="width: 150px; height: auto; border: 1px solid black;">
