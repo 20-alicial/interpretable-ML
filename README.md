@@ -10,4 +10,8 @@ There are three base custom plugins which most of the functionalities consist of
 
 Open `experiment.html` in browser (tested in Chrome) to run the experiment.
 
-
+## Example of functionality
+Users are presented with the least degree of detail first. Under each box are multiple buttons, representing different levels of information.
+![Modular development explanation example at initial state](/example1.png?raw=true "Example 1")
+The user can toggle the buttons to reveal different levels of information. Here, the user has revealed more information in two boxes.
+![Modular development explanation example with more information revealed](/example2.png?raw=true "Example 2")
